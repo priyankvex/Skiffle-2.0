@@ -27,4 +27,18 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.1.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
     testCompile 'junit:junit:4.12'
+
+    // network
+    compile "com.squareup.retrofit2:retrofit:$rootProject.retrofit_version"
+    compile "com.squareup.retrofit2:converter-gson:$rootProject.retrofit_version"
+    compile "com.squareup.picasso:picasso:$rootProject.picasso_version"
+
+    // dagger
+    compile "com.google.dagger:dagger:$rootProject.dagger_version"
+    annotationProcessor "com.google.dagger:dagger-compiler:$rootProject.dagger_version"
+
+    // rx stuff
+    compile "io.reactivex.rxjava2:rxandroid:$rootProject.rxandroid_version"
+    compile "io.reactivex.rxjava2:rxjava:$rootProject.rxjava_version"
+    compile "com.squareup.retrofit2:adapter-rxjava:$rootProject.retrofit_version"
 }

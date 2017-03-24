@@ -30,4 +30,6 @@ ext {
     rxandroid_version = '2.0.1'
     picasso_okhttp3_downloader_version = '1.1.0'
     logging_interceptor_version = '3.2.0'
+    design_support_library_version = '25.1.0'
+    butterknife_version = '8.5.1'
 }

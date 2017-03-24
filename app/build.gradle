@@ -17,6 +17,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
 }
 
 dependencies {
@@ -32,6 +35,8 @@ dependencies {
     compile "com.squareup.retrofit2:retrofit:$rootProject.retrofit_version"
     compile "com.squareup.retrofit2:converter-gson:$rootProject.retrofit_version"
     compile "com.squareup.picasso:picasso:$rootProject.picasso_version"
+    compile "com.jakewharton.picasso:picasso2-okhttp3-downloader:$rootProject.picasso_okhttp3_downloader_version"
+    compile "com.squareup.okhttp3:logging-interceptor:$rootProject.logging_interceptor_version"
 
     // dagger
     compile "com.google.dagger:dagger:$rootProject.dagger_version"

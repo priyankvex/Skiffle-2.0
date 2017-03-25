@@ -7,7 +7,9 @@ import com.priyankvex.skiffle.scope.SkiffleApplicationScope;
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.OkHttpClient;
+
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
@@ -17,7 +19,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @Module(includes = NetworkModule.class)
 public class SpotifyServiceModule {
 
-    private final String BASE_URL = "";
+    private final String BASE_URL = "https://jsonplaceholder.typicode.com";
     @Provides
     @SkiffleApplicationScope
     public SpotifyService gyanService(Retrofit gyanRetrofit) {
@@ -35,6 +37,7 @@ public class SpotifyServiceModule {
     public Retrofit retrofit(OkHttpClient okHttpClient, Gson gson) {
         return new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create(gson))
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(okHttpClient)
                 .baseUrl(BASE_URL)
                 .build();

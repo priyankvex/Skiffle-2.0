@@ -46,7 +46,7 @@ dependencies {
     // rx stuff
     compile "io.reactivex.rxjava2:rxandroid:$rootProject.rxandroid_version"
     compile "io.reactivex.rxjava2:rxjava:$rootProject.rxjava_version"
-    compile "com.squareup.retrofit2:adapter-rxjava:$rootProject.retrofit_version"
+    compile "com.squareup.retrofit2:adapter-rxjava2:$rootProject.retrofit_version"
 
     // view injection by butter knife
     compile "com.jakewharton:butterknife:$rootProject.butterknife_version"

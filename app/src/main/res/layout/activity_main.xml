@@ -40,8 +40,8 @@
         android:paddingBottom="20dp"
         android:paddingStart="15dp"
         app:headerLayout="@layout/nav_header"
-        app:itemIconTint="@color/colorAccent"
-        app:itemTextColor="@color/colorPrimaryDark"
+        app:itemIconTint="@color/drawer_item"
+        app:itemTextColor="@color/drawer_item"
         app:itemBackground="@android:color/transparent"
         app:menu="@menu/navigation_drawer_items"
         android:background="#ffffff"/>

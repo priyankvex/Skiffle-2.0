@@ -9,8 +9,8 @@ import android.support.v4.app.FragmentManager;
 
 public class ActivityUtil {
 
-    public static void replaceFragmentInContainer(Fragment fragment, int containerId){
-        FragmentManager fragmentManager = fragment.getActivity().getSupportFragmentManager();
+    public static void replaceFragmentInContainer(FragmentManager fragmentManager
+            , Fragment fragment, int containerId){
         fragmentManager.beginTransaction().replace(containerId, fragment).commit();
     }
 }

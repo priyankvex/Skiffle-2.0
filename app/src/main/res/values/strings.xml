@@ -2,4 +2,8 @@
     <string name="app_name">Skiffle</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="new_releases">New Releases</string>
+    <string name="recommendations">Recommendations</string>
+    <string name="about">About</string>
+    <string name="favorites">Favorites</string>
 </resources>

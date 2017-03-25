@@ -10,6 +10,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.priyankvex.skiffle.util.ActivityUtil;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -51,6 +53,12 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        switch (id){
+            case R.id.item_home:
+                ActivityUtil.replaceFragmentInContainer(null, R.id.container);
+                break;
+        }
         return false;
     }
 }

@@ -37,7 +37,7 @@ public class NewReleasesFragment extends Fragment implements NewReleasesMvp.NewR
 
         mPresenter.testMethod();
 
-        mPresenter.getPosts();
+        mPresenter.getNewReleases();
 
         return rootView;
     }

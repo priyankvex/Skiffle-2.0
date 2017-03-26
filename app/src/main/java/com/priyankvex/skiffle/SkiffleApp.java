@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.priyankvex.skiffle.component.DaggerSkiffleApplicationComponent;
 import com.priyankvex.skiffle.component.SkiffleApplicationComponent;
+import com.priyankvex.skiffle.datasource.SpotifyAuthService;
 import com.priyankvex.skiffle.module.ContextModule;
 
 /**
@@ -15,6 +16,8 @@ public class SkiffleApp extends Application{
     private static SkiffleApp mInstance;
 
     private SkiffleApplicationComponent mComponent;
+
+    private SpotifyAuthService mSpotifyAuthService;
 
     @Override
     public void onCreate() {

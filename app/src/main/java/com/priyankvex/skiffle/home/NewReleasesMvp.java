@@ -11,6 +11,6 @@ public interface NewReleasesMvp {
     }
 
     interface NewReleasesPresenter{
-        void getPosts();
+        void getNewReleases();
     }
 }

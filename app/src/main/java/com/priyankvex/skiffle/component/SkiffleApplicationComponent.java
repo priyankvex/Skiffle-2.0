@@ -1,6 +1,7 @@
 package com.priyankvex.skiffle.component;
 
 import com.priyankvex.skiffle.datasource.DataSourceContract;
+import com.priyankvex.skiffle.datasource.SpotifyAuthService;
 import com.priyankvex.skiffle.datasource.SpotifyService;
 import com.priyankvex.skiffle.module.DataSourceModule;
 import com.priyankvex.skiffle.module.PicassoModule;
@@ -22,5 +23,7 @@ public interface SkiffleApplicationComponent {
     DataSourceContract getDataSource();
 
     SpotifyService getSpotifyService();
+
+    SpotifyAuthService getSpotifyAuthService();
 
 }

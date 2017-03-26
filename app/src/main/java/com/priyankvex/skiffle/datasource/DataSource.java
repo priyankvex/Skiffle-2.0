@@ -48,6 +48,11 @@ public class DataSource implements DataSourceContract{
         return Holder.INSTANCE;
     }
 
+    /**
+     * Returns auth header consisting of auth token that is required for every
+     * request to API
+     * @return map containing the required headers
+     */
     @Override
     public Map<String, String> getAuthHeader() {
         Map<String, String> headers = new HashMap<>();
@@ -57,6 +62,10 @@ public class DataSource implements DataSourceContract{
         return headers;
     }
 
+    /**
+     * Renews auth token and saves it to shared preferences
+     * @param callback callback to presenter to notify about renewal status
+     */
     @Override
     public void renewAuthToken(final AuthRenewCallback callback) {
         String grantType = "client_credentials";

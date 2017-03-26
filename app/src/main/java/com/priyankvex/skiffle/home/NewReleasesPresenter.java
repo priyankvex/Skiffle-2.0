@@ -44,6 +44,9 @@ public class NewReleasesPresenter implements NewReleasesMvp.NewReleasesPresenter
         Log.d(getClass().getName(), "New Release Presenter Test method");
     }
 
+    /**
+     * Gets new releases from the API and updates the view accordingly
+     */
     @Override
     public void getNewReleases() {
         mDisposableObserver = new DisposableObserver<JsonObject>() {

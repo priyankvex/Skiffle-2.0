@@ -5,6 +5,7 @@ import android.util.Log;
 import com.google.gson.JsonObject;
 import com.priyankvex.skiffle.datasource.DataSourceContract;
 import com.priyankvex.skiffle.datasource.SpotifyService;
+import com.priyankvex.skiffle.model.NewRelease;
 
 import java.util.Map;
 
@@ -28,7 +29,7 @@ public class NewReleasesPresenter implements NewReleasesMvp.NewReleasesPresenter
 
     private NewReleasesMvp.NewReleasesView mView;
 
-    private DisposableObserver<JsonObject> mDisposableObserver;
+    private DisposableObserver<NewRelease> mDisposableObserver;
 
     @Inject
     NewReleasesPresenter(SpotifyService spotifyService,
@@ -40,19 +41,16 @@ public class NewReleasesPresenter implements NewReleasesMvp.NewReleasesPresenter
         mView.showErrorUi("");
     }
 
-    void testMethod(){
-        Log.d(getClass().getName(), "New Release Presenter Test method");
-    }
-
     /**
      * Gets new releases from the API and updates the view accordingly
      */
     @Override
     public void getNewReleases() {
-        mDisposableObserver = new DisposableObserver<JsonObject>() {
+        mDisposableObserver = new DisposableObserver<NewRelease>() {
             @Override
-            public void onNext(JsonObject value) {
-                Log.d(getClass().getName(), value.toString());
+            public void onNext(NewRelease newReleases) {
+                Log.d(getClass().getName(), newReleases.albums.items.size() + " releases received");
+                mView.showNewReleases(newReleases);
             }
 
             @Override

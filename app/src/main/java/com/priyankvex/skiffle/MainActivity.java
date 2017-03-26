@@ -45,6 +45,9 @@ public class MainActivity extends AppCompatActivity implements
         mDrawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         mNavigationView.setNavigationItemSelectedListener(this);
+        // always start with new release fragment
+        ActivityUtil.replaceFragmentInContainer(getSupportFragmentManager(),
+                new NewReleasesFragment(), R.id.container);
     }
 
     protected void setUpToolbar(String title){

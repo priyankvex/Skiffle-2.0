@@ -1,6 +1,7 @@
 package com.priyankvex.skiffle.datasource;
 
 import com.google.gson.JsonObject;
+import com.priyankvex.skiffle.model.NewRelease;
 
 import java.util.Map;
 
@@ -17,7 +18,7 @@ import retrofit2.http.POST;
 public interface SpotifyService {
 
     @GET("browse/new-releases")
-    Observable<JsonObject> getNewReleases(
+    Observable<NewRelease> getNewReleases(
             @HeaderMap Map<String, String> headers
     );
 

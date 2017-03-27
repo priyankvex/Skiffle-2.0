@@ -74,6 +74,7 @@ public class NewReleasesPresenter implements NewReleasesMvp.NewReleasesPresenter
                     }
                 }
                 Log.d(getClass().getName(), e.getLocalizedMessage());
+                mView.showErrorUi("");
             }
 
             @Override

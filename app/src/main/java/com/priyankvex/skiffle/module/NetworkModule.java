@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.priyankvex.skiffle.scope.SkiffleApplicationScope;
+import com.priyankvex.skiffle.util.CachingControlInterceptor;
 
 import java.io.File;
 
@@ -25,7 +26,7 @@ public class NetworkModule {
                 Log.d("SkiffleApp", message);
             }
         });
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BASIC);
+        interceptor.setLevel(HttpLoggingInterceptor.Level.HEADERS);
         return interceptor;
     }
 
@@ -45,6 +46,8 @@ public class NetworkModule {
     @SkiffleApplicationScope
     public OkHttpClient okHttpClient(HttpLoggingInterceptor loggingInterceptor, Cache cache) {
         return new OkHttpClient.Builder()
+                .addNetworkInterceptor(new CachingControlInterceptor.RewriteResponseInterceptor())
+                .addInterceptor(new CachingControlInterceptor.OfflineInterceptor())
                 .addInterceptor(loggingInterceptor)
                 .cache(cache)
                 .build();

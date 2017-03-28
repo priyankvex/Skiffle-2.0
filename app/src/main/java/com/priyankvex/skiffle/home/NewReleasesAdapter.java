@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.priyankvex.skiffle.R;
@@ -23,21 +24,27 @@ class NewReleasesAdapter extends RecyclerView.Adapter<NewReleasesAdapter.ViewHol
 
     static class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView textView;
+        private TextView textViewTitle;
+        private TextView textViewArtist;
+        private TextView textViewType;
+        private ImageView imageViewCover;
 
         public ViewHolder(View itemView){
             super(itemView);
-            textView = (TextView) itemView.findViewById(R.id.text_view_title);
+            textViewTitle = (TextView) itemView.findViewById(R.id.text_view_title);
+            imageViewCover = (ImageView) itemView.findViewById(R.id.image_view_cover);
+            textViewArtist = (TextView) itemView.findViewById(R.id.text_view_artist);
+            textViewType = (TextView) itemView.findViewById(R.id.text_view_type);
         }
     }
 
-    private Picasso mPicasso;
+    private Context mContext;
 
     private ArrayList<NewRelease.Album.Item> newReleaseItems;
 
     @Inject
-    NewReleasesAdapter(Picasso picasso){
-        this.mPicasso = picasso;
+    NewReleasesAdapter(Context context){
+        this.mContext = context;
         this.newReleaseItems = new ArrayList<>();
     }
 
@@ -53,7 +60,12 @@ class NewReleasesAdapter extends RecyclerView.Adapter<NewReleasesAdapter.ViewHol
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         NewRelease.Album.Item item = newReleaseItems.get(position);
-        holder.textView.setText(item.name);
+        holder.textViewTitle.setText(item.name);
+        holder.textViewArtist.setText(item.artists.get(0).name);
+        holder.textViewType.setText(item.type);
+        Picasso.with(mContext)
+                .load(item.images.get(2).url)
+                .into(holder.imageViewCover);
     }
 
     @Override

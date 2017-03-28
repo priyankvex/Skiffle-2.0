@@ -1,5 +1,7 @@
 package com.priyankvex.skiffle.component;
 
+import android.content.Context;
+
 import com.priyankvex.skiffle.datasource.DataSourceContract;
 import com.priyankvex.skiffle.datasource.SpotifyAuthService;
 import com.priyankvex.skiffle.datasource.SpotifyService;
@@ -25,5 +27,7 @@ public interface SkiffleApplicationComponent {
     SpotifyService getSpotifyService();
 
     SpotifyAuthService getSpotifyAuthService();
+
+    Context getContext();
 
 }

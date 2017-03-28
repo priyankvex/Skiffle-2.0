@@ -1,12 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="100dp">
+    android:layout_height="100dp"
+    android:paddingStart="15dp"
+    android:paddingEnd="15dp">
+
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:id="@+id/image_view_cover"
+        android:src="@mipmap/ic_launcher"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true"/>
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:id="@+id/text_view_title"
-        android:gravity="center"/>
+        android:text="Sample title"
+        android:textSize="16sp"
+        android:maxLines="1"
+        android:ellipsize="marquee"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_marginStart="15dp"
+        android:layout_alignTop="@+id/image_view_cover"
+        android:layout_toEndOf="@+id/image_view_cover" />
 
-</LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_view_artist"
+        android:text="Sample Artist"
+        android:textColor="@color/colorPrimary"
+        android:layout_centerVertical="true"
+        android:layout_alignStart="@+id/text_view_title" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_view_type"
+        android:text="Type : Album"
+        android:textColor="#888888"
+        android:layout_alignBottom="@+id/image_view_cover"
+        android:layout_alignStart="@+id/text_view_artist" />
+
+</RelativeLayout>

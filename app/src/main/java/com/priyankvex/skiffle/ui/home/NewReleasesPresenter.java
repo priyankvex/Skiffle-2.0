@@ -1,8 +1,7 @@
-package com.priyankvex.skiffle.home;
+package com.priyankvex.skiffle.ui.home;
 
 import android.util.Log;
 
-import com.google.gson.JsonObject;
 import com.priyankvex.skiffle.datasource.DataSourceContract;
 import com.priyankvex.skiffle.datasource.SpotifyService;
 import com.priyankvex.skiffle.model.NewRelease;

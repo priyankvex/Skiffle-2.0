@@ -1,4 +1,4 @@
-package com.priyankvex.skiffle.home;
+package com.priyankvex.skiffle.ui.home;
 
 import com.priyankvex.skiffle.model.NewRelease;
 
@@ -11,9 +11,11 @@ public interface NewReleasesMvp {
     interface NewReleasesView{
         void showErrorUi(String errorMessage);
         void showNewReleases(NewRelease newRelease);
+        void newReleaseItemClicked(int position, NewRelease.Album.Item item);
     }
 
     interface NewReleasesPresenter{
         void getNewReleases();
     }
+
 }

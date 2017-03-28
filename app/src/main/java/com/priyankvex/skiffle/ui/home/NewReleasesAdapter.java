@@ -1,4 +1,4 @@
-package com.priyankvex.skiffle.home;
+package com.priyankvex.skiffle.ui.home;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -36,24 +36,35 @@ class NewReleasesAdapter extends RecyclerView.Adapter<NewReleasesAdapter.ViewHol
             textViewArtist = (TextView) itemView.findViewById(R.id.text_view_artist);
             textViewType = (TextView) itemView.findViewById(R.id.text_view_type);
         }
+
     }
 
     private Context mContext;
 
+    private NewReleasesMvp.NewReleasesView mCommunicator;
+
     private ArrayList<NewRelease.Album.Item> newReleaseItems;
 
     @Inject
-    NewReleasesAdapter(Context context){
+    NewReleasesAdapter(NewReleasesMvp.NewReleasesView communicator, Context context){
         this.mContext = context;
+        this.mCommunicator = communicator;
         this.newReleaseItems = new ArrayList<>();
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(final ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         View contactView = inflater.inflate(R.layout.list_item_new_releases, parent, false);
-        ViewHolder viewHolder = new ViewHolder(contactView);
+        final ViewHolder viewHolder = new ViewHolder(contactView);
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int position = viewHolder.getAdapterPosition();
+                mCommunicator.newReleaseItemClicked(position, newReleaseItems.get(position));
+            }
+        });
         return viewHolder;
     }
 
@@ -78,6 +89,5 @@ class NewReleasesAdapter extends RecyclerView.Adapter<NewReleasesAdapter.ViewHol
         newReleaseItems.addAll(items);
         notifyDataSetChanged();
     }
-
 
 }

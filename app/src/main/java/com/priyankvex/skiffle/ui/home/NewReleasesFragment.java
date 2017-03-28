@@ -1,4 +1,4 @@
-package com.priyankvex.skiffle.home;
+package com.priyankvex.skiffle.ui.home;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -26,7 +26,7 @@ import butterknife.ButterKnife;
  * Created by @priyankvex on 25/3/17.
  */
 
-public class NewReleasesFragment extends Fragment implements NewReleasesMvp.NewReleasesView{
+public class NewReleasesFragment extends Fragment implements NewReleasesMvp.NewReleasesView {
 
     @Inject
     NewReleasesPresenter mPresenter;
@@ -65,5 +65,10 @@ public class NewReleasesFragment extends Fragment implements NewReleasesMvp.NewR
     @Override
     public void showNewReleases(NewRelease newRelease) {
         mAdapter.swapData(newRelease.albums.items);
+    }
+
+    @Override
+    public void newReleaseItemClicked(int position, NewRelease.Album.Item item) {
+        Log.d("owlcity", item.name + " clicked");
     }
 }

@@ -1,6 +1,6 @@
 package com.priyankvex.skiffle.module;
 
-import com.priyankvex.skiffle.home.NewReleasesMvp;
+import com.priyankvex.skiffle.ui.home.NewReleasesMvp;
 import com.priyankvex.skiffle.scope.NewReleasesScope;
 
 import dagger.Module;
@@ -24,4 +24,5 @@ public class NewReleasesModule {
     NewReleasesMvp.NewReleasesView getView(){
         return mView;
     }
+
 }

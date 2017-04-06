@@ -16,6 +16,7 @@ import com.priyankvex.skiffle.R;
 import com.priyankvex.skiffle.SkiffleApp;
 import com.priyankvex.skiffle.component.DaggerShowAlbumDetailsComponent;
 import com.priyankvex.skiffle.component.ShowAlbumDetailsComponent;
+import com.priyankvex.skiffle.model.Album;
 import com.priyankvex.skiffle.module.ShowAlbumDetailsModule;
 
 import java.util.ArrayList;
@@ -94,14 +95,14 @@ public class ShowAlbumDetailsActivity extends AppCompatActivity implements ShowA
     }
 
     @Override
-    public void showAlbumDetails(JsonObject album) {
+    public void showAlbumDetails(Album album) {
         if (mDetailsFragment != null){
             mDetailsFragment.showAlbumDetails(album);
         }
     }
 
     @Override
-    public void showTracks(ArrayList<String> tracks) {
+    public void showTracks(Album.Track tracks) {
         if (mTracksFragment != null){
             mTracksFragment.showTracks(tracks);
         }

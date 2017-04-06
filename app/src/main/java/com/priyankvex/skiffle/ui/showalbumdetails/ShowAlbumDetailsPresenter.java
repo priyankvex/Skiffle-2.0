@@ -5,6 +5,7 @@ import android.util.Log;
 import com.google.gson.JsonObject;
 import com.priyankvex.skiffle.datasource.DataSourceContract;
 import com.priyankvex.skiffle.datasource.SpotifyService;
+import com.priyankvex.skiffle.model.Album;
 
 import java.util.Map;
 
@@ -26,7 +27,7 @@ class ShowAlbumDetailsPresenter implements ShowAlbumDetailsMvp.ShowAldumDetailsP
 
     private ShowAlbumDetailsMvp.ShowAlbumDetailsView mView;
 
-    private DisposableObserver<JsonObject> mDisposableObserver;
+    private DisposableObserver<Album> mDisposableObserver;
 
     @Inject
     ShowAlbumDetailsPresenter(SpotifyService spotifyService,
@@ -39,20 +40,23 @@ class ShowAlbumDetailsPresenter implements ShowAlbumDetailsMvp.ShowAldumDetailsP
 
     @Override
     public void getAlbumDetails(String albumId) {
-        mDisposableObserver = new DisposableObserver<JsonObject>() {
+        mDisposableObserver = new DisposableObserver<Album>() {
             @Override
-            public void onNext(JsonObject value) {
-                Log.d("owlcity", "Album Details of" + value.get("name").getAsString());
+            public void onNext(Album value) {
+                Log.d("owlcity", "Album Details of" + value.name);
+                mView.showTracks(value.tracks);
+                mView.showAlbumDetails(value);
             }
 
             @Override
             public void onError(Throwable e) {
                 Log.d("owlcity", e.getLocalizedMessage());
+                mView.showErrorUi();
             }
 
             @Override
             public void onComplete() {
-
+                Log.d("owlcity", "Loading album details completed");
             }
         };
 

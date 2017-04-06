@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.priyankvex.skiffle.R;
+import com.priyankvex.skiffle.model.Album;
 
 import java.util.ArrayList;
 
@@ -42,7 +43,7 @@ public class ShowAlbumTracksFragment extends Fragment {
 
     }
 
-    void showTracks(ArrayList<String> tracks){
+    void showTracks(Album.Track tracks){
 
     }
 

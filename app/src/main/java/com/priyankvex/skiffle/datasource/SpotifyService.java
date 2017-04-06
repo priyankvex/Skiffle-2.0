@@ -1,6 +1,7 @@
 package com.priyankvex.skiffle.datasource;
 
 import com.google.gson.JsonObject;
+import com.priyankvex.skiffle.model.Album;
 import com.priyankvex.skiffle.model.NewRelease;
 
 import java.util.Map;
@@ -24,7 +25,7 @@ public interface SpotifyService {
     );
 
     @GET("albums/{id}")
-    Observable<JsonObject> getAlbum(
+    Observable<Album> getAlbum(
             @Path("id") String id,
             @HeaderMap Map<String, String> headers
     );

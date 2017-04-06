@@ -1,6 +1,7 @@
 package com.priyankvex.skiffle.ui.showalbumdetails;
 
 import com.google.gson.JsonObject;
+import com.priyankvex.skiffle.model.Album;
 
 import java.util.ArrayList;
 
@@ -12,8 +13,8 @@ public interface ShowAlbumDetailsMvp {
 
     interface ShowAlbumDetailsView{
         void showErrorUi();
-        void showAlbumDetails(JsonObject album);
-        void showTracks(ArrayList<String> tracks);
+        void showAlbumDetails(Album album);
+        void showTracks(Album.Track tracks);
     }
 
     interface ShowAldumDetailsPresenter{

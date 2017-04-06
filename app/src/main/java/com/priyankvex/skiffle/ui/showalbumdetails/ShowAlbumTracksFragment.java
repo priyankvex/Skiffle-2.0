@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 
 import com.priyankvex.skiffle.R;
 
+import java.util.ArrayList;
+
 /**
  * Created by @priyankvex on 28/3/17.
  */
@@ -34,6 +36,14 @@ public class ShowAlbumTracksFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_show_album_tracks, container, false);
+    }
+
+    void showErrorUi(){
+
+    }
+
+    void showTracks(ArrayList<String> tracks){
+
     }
 
     interface AlbumTracksCommunicator {

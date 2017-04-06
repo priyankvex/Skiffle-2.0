@@ -9,8 +9,18 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 
+import com.google.gson.JsonObject;
 import com.priyankvex.skiffle.R;
+import com.priyankvex.skiffle.SkiffleApp;
+import com.priyankvex.skiffle.component.DaggerShowAlbumDetailsComponent;
+import com.priyankvex.skiffle.component.ShowAlbumDetailsComponent;
+import com.priyankvex.skiffle.module.ShowAlbumDetailsModule;
+
+import java.util.ArrayList;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -20,7 +30,7 @@ import butterknife.ButterKnife;
  */
 
 public class ShowAlbumDetailsActivity extends AppCompatActivity implements ShowAlbumDetailsFragment.AlbumDetailsCommunicator,
-        ShowAlbumTracksFragment.AlbumTracksCommunicator{
+        ShowAlbumTracksFragment.AlbumTracksCommunicator, ShowAlbumDetailsMvp.ShowAlbumDetailsView{
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
@@ -31,6 +41,13 @@ public class ShowAlbumDetailsActivity extends AppCompatActivity implements ShowA
     @BindView(R.id.viewpager)
     ViewPager mViewPager;
 
+    @Inject
+    ShowAlbumDetailsPresenter mPresenter;
+
+    private ShowAlbumDetailsFragment mDetailsFragment;
+
+    private ShowAlbumTracksFragment mTracksFragment;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +56,13 @@ public class ShowAlbumDetailsActivity extends AppCompatActivity implements ShowA
         setUpToolbar();
         setUpTabLayout();
         setUpViewPager();
+        Log.d("owlcity", "Album id : " + getIntent().getStringExtra("album_id"));
+        ShowAlbumDetailsComponent component = DaggerShowAlbumDetailsComponent.builder()
+                .showAlbumDetailsModule(new ShowAlbumDetailsModule(this))
+                .skiffleApplicationComponent(SkiffleApp.getInstance().getComponent())
+                .build();
+        component.inject(this);
+        mPresenter.getAlbumDetails(getIntent().getStringExtra("album_id"));
     }
 
     private void setUpToolbar(){
@@ -59,6 +83,30 @@ public class ShowAlbumDetailsActivity extends AppCompatActivity implements ShowA
         mTabLayout.setupWithViewPager(mViewPager);
     }
 
+    @Override
+    public void showErrorUi() {
+        if (mDetailsFragment != null){
+            mDetailsFragment.showErrorUi();
+        }
+        if (mTracksFragment != null){
+            mTracksFragment.showErrorUi();
+        }
+    }
+
+    @Override
+    public void showAlbumDetails(JsonObject album) {
+        if (mDetailsFragment != null){
+            mDetailsFragment.showAlbumDetails(album);
+        }
+    }
+
+    @Override
+    public void showTracks(ArrayList<String> tracks) {
+        if (mTracksFragment != null){
+            mTracksFragment.showTracks(tracks);
+        }
+    }
+
     private class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
         ViewPagerAdapter(FragmentManager fm) {
@@ -69,8 +117,16 @@ public class ShowAlbumDetailsActivity extends AppCompatActivity implements ShowA
         public Fragment getItem(int position) {
 
             switch (position){
-                case 0 : return ShowAlbumDetailsFragment.getInstance();
-                case 1 : return ShowAlbumTracksFragment.getInstance();
+                case 0 :
+                    if (mDetailsFragment == null){
+                        mDetailsFragment = ShowAlbumDetailsFragment.getInstance();
+                    }
+                    return mDetailsFragment;
+                case 1 :
+                    if (mTracksFragment == null){
+                        mTracksFragment = ShowAlbumTracksFragment.getInstance();
+                    }
+                    return mTracksFragment;
             }
             return null;
         }

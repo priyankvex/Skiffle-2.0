@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.gson.JsonObject;
 import com.priyankvex.skiffle.R;
 
 /**
@@ -35,6 +36,14 @@ public class ShowAlbumDetailsFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_show_album_details, container, false);
+    }
+
+    void showErrorUi(){
+
+    }
+
+    void showAlbumDetails(JsonObject jsonObject){
+
     }
 
     interface AlbumDetailsCommunicator {

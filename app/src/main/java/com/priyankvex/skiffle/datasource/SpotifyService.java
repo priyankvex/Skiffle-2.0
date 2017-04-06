@@ -9,6 +9,7 @@ import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.HeaderMap;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 
 /**
@@ -19,6 +20,12 @@ public interface SpotifyService {
 
     @GET("browse/new-releases")
     Observable<NewRelease> getNewReleases(
+            @HeaderMap Map<String, String> headers
+    );
+
+    @GET("albums/{id}")
+    Observable<JsonObject> getAlbum(
+            @Path("id") String id,
             @HeaderMap Map<String, String> headers
     );
 

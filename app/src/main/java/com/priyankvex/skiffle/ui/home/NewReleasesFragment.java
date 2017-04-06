@@ -1,5 +1,6 @@
 package com.priyankvex.skiffle.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -16,6 +17,7 @@ import com.priyankvex.skiffle.component.DaggerNewReleasesComponent;
 import com.priyankvex.skiffle.component.NewReleasesComponent;
 import com.priyankvex.skiffle.model.NewRelease;
 import com.priyankvex.skiffle.module.NewReleasesModule;
+import com.priyankvex.skiffle.ui.showalbumdetails.ShowAlbumDetailsActivity;
 
 import javax.inject.Inject;
 
@@ -70,5 +72,9 @@ public class NewReleasesFragment extends Fragment implements NewReleasesMvp.NewR
     @Override
     public void newReleaseItemClicked(int position, NewRelease.Album.Item item) {
         Log.d("owlcity", item.name + " clicked");
+        Intent i = new Intent(getActivity(), ShowAlbumDetailsActivity.class);
+        i.putExtra("album_id", item.id);
+        i.putExtra("album_title", item.name);
+        startActivity(i);
     }
 }

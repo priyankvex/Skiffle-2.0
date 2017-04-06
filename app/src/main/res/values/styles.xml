@@ -20,4 +20,10 @@
         <item name="colorControlHighlight">#eeeeee</item>
     </style>
 
+    <style name="SkiffleTab" parent="Widget.Design.TabLayout">
+        <item name="tabSelectedTextColor">@color/colorPrimaryLight</item>
+        <item name="tabTextColor">#ffffff</item>
+        <item name="tabTextAppearance">@android:style/TextAppearance.Widget.TabWidget</item>
+    </style>
+
 </resources>

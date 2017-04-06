@@ -3,6 +3,7 @@ package com.priyankvex.skiffle.component;
 import com.priyankvex.skiffle.module.ShowAlbumDetailsModule;
 import com.priyankvex.skiffle.scope.ShowAlbumDetailsScope;
 import com.priyankvex.skiffle.ui.showalbumdetails.ShowAlbumDetailsActivity;
+import com.priyankvex.skiffle.ui.showalbumdetails.ShowAlbumTracksFragment;
 
 import dagger.Component;
 
@@ -15,4 +16,5 @@ import dagger.Component;
 public interface ShowAlbumDetailsComponent {
 
     void inject(ShowAlbumDetailsActivity activity);
+    void inject(ShowAlbumTracksFragment fragment);
 }

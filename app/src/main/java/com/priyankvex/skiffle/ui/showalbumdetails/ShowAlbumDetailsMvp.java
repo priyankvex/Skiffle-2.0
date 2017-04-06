@@ -14,7 +14,7 @@ public interface ShowAlbumDetailsMvp {
     interface ShowAlbumDetailsView{
         void showErrorUi();
         void showAlbumDetails(Album album);
-        void showTracks(Album.Track tracks);
+        void showTracks(Album album);
     }
 
     interface ShowAldumDetailsPresenter{

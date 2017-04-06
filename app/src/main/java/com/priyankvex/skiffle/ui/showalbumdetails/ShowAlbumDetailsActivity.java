@@ -49,6 +49,8 @@ public class ShowAlbumDetailsActivity extends AppCompatActivity implements ShowA
 
     private ShowAlbumTracksFragment mTracksFragment;
 
+    private ShowAlbumDetailsComponent mComponent;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,13 +58,13 @@ public class ShowAlbumDetailsActivity extends AppCompatActivity implements ShowA
         ButterKnife.bind(this);
         setUpToolbar();
         setUpTabLayout();
-        setUpViewPager();
         Log.d("owlcity", "Album id : " + getIntent().getStringExtra("album_id"));
-        ShowAlbumDetailsComponent component = DaggerShowAlbumDetailsComponent.builder()
+        mComponent = DaggerShowAlbumDetailsComponent.builder()
                 .showAlbumDetailsModule(new ShowAlbumDetailsModule(this))
                 .skiffleApplicationComponent(SkiffleApp.getInstance().getComponent())
                 .build();
-        component.inject(this);
+        mComponent.inject(this);
+        setUpViewPager();
         mPresenter.getAlbumDetails(getIntent().getStringExtra("album_id"));
     }
 
@@ -102,10 +104,15 @@ public class ShowAlbumDetailsActivity extends AppCompatActivity implements ShowA
     }
 
     @Override
-    public void showTracks(Album.Track tracks) {
+    public void showTracks(Album album) {
         if (mTracksFragment != null){
-            mTracksFragment.showTracks(tracks);
+            mTracksFragment.showTracks(album);
         }
+    }
+
+    @Override
+    public ShowAlbumDetailsComponent getComponent() {
+        return mComponent;
     }
 
     private class ViewPagerAdapter extends FragmentStatePagerAdapter {

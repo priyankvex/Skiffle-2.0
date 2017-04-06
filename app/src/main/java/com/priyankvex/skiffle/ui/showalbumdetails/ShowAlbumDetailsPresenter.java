@@ -44,8 +44,8 @@ class ShowAlbumDetailsPresenter implements ShowAlbumDetailsMvp.ShowAldumDetailsP
             @Override
             public void onNext(Album value) {
                 Log.d("owlcity", "Album Details of" + value.name);
-                mView.showTracks(value.tracks);
                 mView.showAlbumDetails(value);
+                mView.showTracks(value);
             }
 
             @Override

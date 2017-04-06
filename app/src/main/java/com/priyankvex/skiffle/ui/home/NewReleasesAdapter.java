@@ -29,7 +29,7 @@ class NewReleasesAdapter extends RecyclerView.Adapter<NewReleasesAdapter.ViewHol
         private TextView textViewType;
         private ImageView imageViewCover;
 
-        public ViewHolder(View itemView){
+        ViewHolder(View itemView){
             super(itemView);
             textViewTitle = (TextView) itemView.findViewById(R.id.text_view_title);
             imageViewCover = (ImageView) itemView.findViewById(R.id.image_view_cover);

@@ -10,6 +10,7 @@ import com.google.gson.Gson;
 import com.priyankvex.skiffle.R;
 import com.priyankvex.skiffle.SkiffleApp;
 import com.priyankvex.skiffle.model.AuthToken;
+import com.priyankvex.skiffle.model.DaoSession;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,6 +18,7 @@ import java.util.Map;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
+import retrofit2.http.HeaderMap;
 
 /**
  * Created by @priyankvex on 25/3/17.
@@ -25,6 +27,8 @@ import io.reactivex.schedulers.Schedulers;
 public class DataSource implements DataSourceContract{
 
     private Gson mGson;
+
+    private DaoSession mDaoSession;
 
     private final String KEY_AUTH_TOKEN = "auth+token";
 
@@ -43,8 +47,9 @@ public class DataSource implements DataSourceContract{
         static final DataSource INSTANCE = new DataSource();
     }
 
-    public static DataSourceContract getDataSource(Gson gson){
+    public static DataSourceContract getDataSource(Gson gson, DaoSession daoSession){
         Holder.INSTANCE.mGson = gson;
+        Holder.INSTANCE.mDaoSession = daoSession;
         return Holder.INSTANCE;
     }
 

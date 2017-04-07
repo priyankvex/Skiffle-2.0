@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao'
 
 android {
     compileSdkVersion 25
@@ -51,4 +52,7 @@ dependencies {
     // view injection by butter knife
     compile "com.jakewharton:butterknife:$rootProject.butterknife_version"
     annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.butterknife_version"
+
+    // green DAO
+    compile "org.greenrobot:greendao:$rootProject.green_dao_version"
 }

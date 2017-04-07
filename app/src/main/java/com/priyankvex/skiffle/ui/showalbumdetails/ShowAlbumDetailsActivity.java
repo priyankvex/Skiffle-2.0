@@ -58,13 +58,13 @@ public class ShowAlbumDetailsActivity extends AppCompatActivity implements ShowA
         ButterKnife.bind(this);
         setUpToolbar();
         setUpTabLayout();
+        setUpViewPager();
         Log.d("owlcity", "Album id : " + getIntent().getStringExtra("album_id"));
         mComponent = DaggerShowAlbumDetailsComponent.builder()
                 .showAlbumDetailsModule(new ShowAlbumDetailsModule(this))
                 .skiffleApplicationComponent(SkiffleApp.getInstance().getComponent())
                 .build();
         mComponent.inject(this);
-        setUpViewPager();
         mPresenter.getAlbumDetails(getIntent().getStringExtra("album_id"));
     }
 

@@ -19,5 +19,6 @@ public interface ShowAlbumDetailsMvp {
 
     interface ShowAldumDetailsPresenter{
         void getAlbumDetails(String albumId);
+        void saveAlbumTOFavorite();
     }
 }

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 public class Album {
 
+    public String id;
     public String name;
     @SerializedName("album_type")
     public String albumType;

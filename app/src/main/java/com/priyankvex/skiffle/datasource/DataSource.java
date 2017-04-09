@@ -9,12 +9,20 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.priyankvex.skiffle.R;
 import com.priyankvex.skiffle.SkiffleApp;
+import com.priyankvex.skiffle.model.Album;
+import com.priyankvex.skiffle.model.AlbumEntity;
 import com.priyankvex.skiffle.model.AuthToken;
 import com.priyankvex.skiffle.model.DaoSession;
 
+import org.reactivestreams.Subscriber;
+
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.Callable;
 
+import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
@@ -128,5 +136,22 @@ public class DataSource implements DataSourceContract{
         return PreferenceManager
                 .getDefaultSharedPreferences(SkiffleApp.getInstance().getApplicationContext())
                 .getString(KEY_AUTH_TOKEN, null);
+    }
+
+    @Override
+    public Observable<Long> saveAlbumToFavorite(final Album album) {
+
+        return Observable.fromCallable(new Callable<Long>() {
+            @Override
+            public Long call() throws Exception {
+                Log.d("owlcity", "Saving " + album.name + " to the database");
+                AlbumEntity entity = new AlbumEntity();
+                entity.setAlbumId(album.id);
+                entity.setAlbumJsonData(mGson.toJson(album));
+                mDaoSession.getAlbumEntityDao().insert(entity);
+                return entity.getId();
+            }
+        });
+
     }
 }

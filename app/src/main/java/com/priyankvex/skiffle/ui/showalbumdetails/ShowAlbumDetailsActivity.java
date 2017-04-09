@@ -100,6 +100,7 @@ public class ShowAlbumDetailsActivity extends AppCompatActivity implements ShowA
     public void showAlbumDetails(Album album) {
         if (mDetailsFragment != null){
             mDetailsFragment.showAlbumDetails(album);
+            mPresenter.saveAlbumTOFavorite();
         }
     }
 

@@ -29,6 +29,8 @@ class ShowAlbumDetailsPresenter implements ShowAlbumDetailsMvp.ShowAldumDetailsP
 
     private DisposableObserver<Album> mDisposableObserver;
 
+    private Album mAlbum;
+
     @Inject
     ShowAlbumDetailsPresenter(SpotifyService spotifyService,
                               ShowAlbumDetailsMvp.ShowAlbumDetailsView view,
@@ -44,6 +46,7 @@ class ShowAlbumDetailsPresenter implements ShowAlbumDetailsMvp.ShowAldumDetailsP
             @Override
             public void onNext(Album value) {
                 Log.d("owlcity", "Album Details of" + value.name);
+                mAlbum = value;
                 mView.showAlbumDetails(value);
                 mView.showTracks(value);
             }
@@ -65,5 +68,29 @@ class ShowAlbumDetailsPresenter implements ShowAlbumDetailsMvp.ShowAldumDetailsP
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(mDisposableObserver);
+    }
+
+    @Override
+    public void saveAlbumTOFavorite() {
+        mDataSource.saveAlbumToFavorite(mAlbum)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribeWith(new DisposableObserver<Long>() {
+                    @Override
+                    public void onNext(Long value) {
+                        Log.d("owlcity", "Album saved with id : " + value);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.d("owlcity", "On error of save album subscriber\n" + e.getLocalizedMessage());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.d("owlcity", "On complete of save album subscriber");
+                    }
+                });
+
     }
 }

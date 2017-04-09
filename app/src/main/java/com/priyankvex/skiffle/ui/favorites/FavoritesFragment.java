@@ -1,0 +1,147 @@
+package com.priyankvex.skiffle.ui.favorites;
+
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import com.priyankvex.skiffle.R;
+import com.priyankvex.skiffle.SkiffleApp;
+import com.priyankvex.skiffle.component.DaggerFavoritesComponent;
+import com.priyankvex.skiffle.component.FavoritesComponent;
+import com.priyankvex.skiffle.model.Album;
+import com.priyankvex.skiffle.model.NewRelease;
+import com.priyankvex.skiffle.module.FavoritesModule;
+
+import java.util.ArrayList;
+
+import javax.inject.Inject;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+/**
+ * Created by priyankvex on 9/4/17.
+ */
+
+public class FavoritesFragment extends Fragment implements FavoritesMvp.FavoritesView,
+        FavoriteAlbumsFragment.FavoriteAlbumsCommunicator {
+
+    @Inject
+    FavoritesPresenter mPresenter;
+
+    @BindView(R.id.tab_layout)
+    TabLayout mTabLayout;
+
+    @BindView(R.id.viewpager)
+    ViewPager mViewPager;
+
+    private FavoriteAlbumsFragment mFavoriteAlbumsFragment;
+
+    private FavoriteTracksFragment mFavoriteTracksFragment;
+
+    private FavoritesComponent mComponent;
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_favorites, container, false);
+        ButterKnife.bind(this, rootView);
+        setUpTabLayout();
+        setUpViewPager();
+
+        mComponent = DaggerFavoritesComponent.builder()
+                .favoritesModule(new FavoritesModule(this))
+                .skiffleApplicationComponent(SkiffleApp.getInstance().getComponent())
+                .build();
+        mComponent.inject(this);
+
+        mPresenter.loadFavoriteAlbums();
+
+        return rootView;
+    }
+
+    @Override
+    public void showFavoriteAlbums(ArrayList<Album> albums) {
+        mFavoriteAlbumsFragment.showFavoriteAlbums(albums);
+    }
+
+    @Override
+    public void showFavoriteTracks() {
+
+    }
+
+    @Override
+    public void showEmptyAlbumsUi() {
+
+    }
+
+    @Override
+    public void onFavoriteAlbumItemClicked(int position, Album album) {
+
+    }
+
+    private void setUpTabLayout(){
+        mTabLayout.addTab(mTabLayout.newTab().setText("Info"));
+        mTabLayout.addTab(mTabLayout.newTab().setText("Tracks"));
+    }
+
+    private void setUpViewPager(){
+        mViewPager.setAdapter(new ViewPagerAdapter(getChildFragmentManager()));
+        mTabLayout.setupWithViewPager(mViewPager);
+    }
+
+    @Override
+    public FavoritesComponent getComponent() {
+        return mComponent;
+    }
+
+    private class ViewPagerAdapter extends FragmentStatePagerAdapter {
+
+        ViewPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+
+            switch (position){
+                case 1 :
+                    if (mFavoriteAlbumsFragment == null){
+                        mFavoriteAlbumsFragment = FavoriteAlbumsFragment.getInstance();
+                        mFavoriteAlbumsFragment.setCommunicator(FavoritesFragment.this);
+                    }
+                    return mFavoriteAlbumsFragment;
+                case 0 :
+                    if (mFavoriteTracksFragment == null){
+                        mFavoriteTracksFragment = FavoriteTracksFragment.getInstance();
+                    }
+                    return mFavoriteTracksFragment;
+            }
+            return null;
+        }
+
+        @Override
+        public int getCount() {
+            return 2;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            switch (position) {
+                case 0:
+                    return "Tracks";
+                case 1:
+                    return "Albums";
+                default:
+                    return "Info";
+            }
+        }
+    }
+}

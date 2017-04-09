@@ -1,10 +1,8 @@
 package com.priyankvex.skiffle.datasource;
 
-import android.content.Context;
-
 import com.priyankvex.skiffle.model.Album;
-import com.priyankvex.skiffle.model.AuthToken;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import io.reactivex.Observable;
@@ -20,6 +18,8 @@ public interface DataSourceContract {
     void renewAuthToken(AuthRenewCallback callback);
 
     Observable<Long> saveAlbumToFavorite(Album album);
+
+    Observable<ArrayList<Album>> loadFavoriteAlbums();
 
     interface AuthRenewCallback {
         void onAuthRenewed();

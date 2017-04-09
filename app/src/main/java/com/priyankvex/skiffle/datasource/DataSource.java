@@ -13,10 +13,13 @@ import com.priyankvex.skiffle.model.Album;
 import com.priyankvex.skiffle.model.AlbumEntity;
 import com.priyankvex.skiffle.model.AuthToken;
 import com.priyankvex.skiffle.model.DaoSession;
+import com.priyankvex.skiffle.model.NewRelease;
 
 import org.reactivestreams.Subscriber;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
 
@@ -153,5 +156,23 @@ public class DataSource implements DataSourceContract{
             }
         });
 
+    }
+
+    @Override
+    public Observable<ArrayList<Album>> loadFavoriteAlbums() {
+        return Observable.fromCallable(new Callable<ArrayList<Album>>() {
+            @Override
+            public ArrayList<Album> call() throws Exception {
+                List<AlbumEntity> albumEntities = mDaoSession.getAlbumEntityDao().loadAll();
+                ArrayList<Album> albums = new ArrayList<>(5);
+                for (AlbumEntity entity : albumEntities){
+                    Album album = mGson.fromJson(entity.getAlbumJsonData(), Album.class);
+                    // drop the tracks to trim the size of the object
+                    album.tracks = null;
+                    albums.add(album);
+                }
+                return albums;
+            }
+        });
     }
 }

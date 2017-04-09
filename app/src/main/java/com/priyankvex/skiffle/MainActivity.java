@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import com.priyankvex.skiffle.ui.favorites.FavoritesFragment;
 import com.priyankvex.skiffle.ui.home.NewReleasesFragment;
 import com.priyankvex.skiffle.util.ActivityUtil;
 
@@ -62,6 +63,11 @@ public class MainActivity extends AppCompatActivity implements
             case R.id.item_home:
                 ActivityUtil.replaceFragmentInContainer(getSupportFragmentManager(),
                         new NewReleasesFragment(), R.id.container);
+                break;
+
+            case R.id.item_favorites:
+                ActivityUtil.replaceFragmentInContainer(getSupportFragmentManager(),
+                        new FavoritesFragment(), R.id.container);
                 break;
         }
         item.setChecked(true);

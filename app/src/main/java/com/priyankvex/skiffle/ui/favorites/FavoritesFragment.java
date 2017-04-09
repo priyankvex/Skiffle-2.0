@@ -1,5 +1,6 @@
 package com.priyankvex.skiffle.ui.favorites;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -7,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +20,7 @@ import com.priyankvex.skiffle.component.FavoritesComponent;
 import com.priyankvex.skiffle.model.Album;
 import com.priyankvex.skiffle.model.NewRelease;
 import com.priyankvex.skiffle.module.FavoritesModule;
+import com.priyankvex.skiffle.ui.showalbumdetails.ShowAlbumDetailsActivity;
 
 import java.util.ArrayList;
 
@@ -84,7 +87,12 @@ public class FavoritesFragment extends Fragment implements FavoritesMvp.Favorite
 
     @Override
     public void onFavoriteAlbumItemClicked(int position, Album album) {
-
+        Log.d("owlcity", album.name + " clicked");
+        Intent i = new Intent(getActivity(), ShowAlbumDetailsActivity.class);
+        i.putExtra("album_id", album.id);
+        i.putExtra("album_title", album.name);
+        i.putExtra("is_saved", true);
+        startActivity(i);
     }
 
     private void setUpTabLayout(){

@@ -11,6 +11,7 @@ import com.priyankvex.skiffle.R;
 import com.priyankvex.skiffle.SkiffleApp;
 import com.priyankvex.skiffle.model.Album;
 import com.priyankvex.skiffle.model.AlbumEntity;
+import com.priyankvex.skiffle.model.AlbumEntityDao;
 import com.priyankvex.skiffle.model.AuthToken;
 import com.priyankvex.skiffle.model.DaoSession;
 import com.priyankvex.skiffle.model.NewRelease;
@@ -148,6 +149,15 @@ public class DataSource implements DataSourceContract{
             @Override
             public Long call() throws Exception {
                 Log.d("owlcity", "Saving " + album.name + " to the database");
+                long count = mDaoSession.getAlbumEntityDao()
+                        .queryBuilder()
+                        .where(AlbumEntityDao.Properties.AlbumId.eq(album.id))
+                        .count();
+                if (count != 0){
+                    // already saved in favorites
+                    Log.d("owlcity", "Album with name " + album.name + " already present in favorites");
+                    return (long)-1;
+                }
                 AlbumEntity entity = new AlbumEntity();
                 entity.setAlbumId(album.id);
                 entity.setAlbumJsonData(mGson.toJson(album));
@@ -172,6 +182,41 @@ public class DataSource implements DataSourceContract{
                     albums.add(album);
                 }
                 return albums;
+            }
+        });
+    }
+
+    @Override
+    public Observable<Long> deleteAlbumFromFavorites(final String albumId) {
+        return Observable.fromCallable(new Callable<Long>() {
+            @Override
+            public Long call() throws Exception {
+                mDaoSession.getAlbumEntityDao().queryBuilder()
+                        .where(AlbumEntityDao.Properties.AlbumId.eq(albumId))
+                        .buildDelete()
+                        .executeDeleteWithoutDetachingEntities();
+                return (long)1;
+            }
+        });
+    }
+
+    @Override
+    public Observable<Album> loadAlbumFromAlbumId(final String albumId) {
+        return Observable.fromCallable(new Callable<Album>() {
+            @Override
+            public Album call() throws Exception {
+                List<AlbumEntity> albums = mDaoSession.getAlbumEntityDao()
+                        .queryBuilder().where(AlbumEntityDao.Properties.AlbumId.eq(albumId))
+                        .limit(1)
+                        .build()
+                        .list();
+                if (albums == null || albums.size() == 0){
+                    return null;
+                }
+                else{
+                    Album album = mGson.fromJson(albums.get(0).getAlbumJsonData(), Album.class);
+                    return album;
+                }
             }
         });
     }

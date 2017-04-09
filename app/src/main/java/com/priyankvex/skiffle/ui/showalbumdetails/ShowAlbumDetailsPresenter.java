@@ -31,6 +31,8 @@ class ShowAlbumDetailsPresenter implements ShowAlbumDetailsMvp.ShowAldumDetailsP
 
     private Album mAlbum;
 
+    private boolean isSavedAlbum = false;
+
     @Inject
     ShowAlbumDetailsPresenter(SpotifyService spotifyService,
                               ShowAlbumDetailsMvp.ShowAlbumDetailsView view,
@@ -42,6 +44,50 @@ class ShowAlbumDetailsPresenter implements ShowAlbumDetailsMvp.ShowAldumDetailsP
 
     @Override
     public void getAlbumDetails(String albumId) {
+        if (isSavedAlbum){
+            getAlbumDetailsFromLocalStorage(albumId);
+        }
+        else{
+            getAlbumDetailsFromRemoteApi(albumId);
+        }
+    }
+
+    private void getAlbumDetailsFromLocalStorage(String albumId){
+
+        mDisposableObserver = new DisposableObserver<Album>() {
+            @Override
+            public void onNext(Album value) {
+                if (value == null){
+                    // couldn't find this album id in the database
+                    mView.setLikedButtonStatus(false);
+                }
+                else{
+                    mView.setLikedButtonStatus(true);
+                    mAlbum = value;
+                    mView.showAlbumDetails(value);
+                    mView.showTracks(value);
+                }
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                mView.showErrorUi();
+            }
+
+            @Override
+            public void onComplete() {
+                Log.d("owlcity", "Loading album from local storage completed");
+            }
+        };
+
+        mDataSource.loadAlbumFromAlbumId(albumId)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribeWith(mDisposableObserver);
+    }
+
+    private void getAlbumDetailsFromRemoteApi(final String albumId){
+
         mDisposableObserver = new DisposableObserver<Album>() {
             @Override
             public void onNext(Album value) {
@@ -49,6 +95,8 @@ class ShowAlbumDetailsPresenter implements ShowAlbumDetailsMvp.ShowAldumDetailsP
                 mAlbum = value;
                 mView.showAlbumDetails(value);
                 mView.showTracks(value);
+                // to check whether this album is in favorites or not
+                getAlbumDetailsFromLocalStorage(albumId);
             }
 
             @Override
@@ -84,13 +132,42 @@ class ShowAlbumDetailsPresenter implements ShowAlbumDetailsMvp.ShowAldumDetailsP
                     @Override
                     public void onError(Throwable e) {
                         Log.d("owlcity", "On error of save album subscriber\n" + e.getLocalizedMessage());
+                        mView.reenableLikeButton();
                     }
 
                     @Override
                     public void onComplete() {
                         Log.d("owlcity", "On complete of save album subscriber");
+                        mView.reenableLikeButton();
                     }
                 });
 
+    }
+
+    @Override
+    public void deleteAlbumFromFavorites() {
+        mDataSource.deleteAlbumFromFavorites(mAlbum.id)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribeWith(new DisposableObserver<Long>() {
+                    @Override
+                    public void onNext(Long value) {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        mView.reenableLikeButton();
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        mView.reenableLikeButton();
+                    }
+                });
+    }
+
+    @Override
+    public void setSavedAlbum(boolean savedAlbum) {
+        isSavedAlbum = savedAlbum;
     }
 }

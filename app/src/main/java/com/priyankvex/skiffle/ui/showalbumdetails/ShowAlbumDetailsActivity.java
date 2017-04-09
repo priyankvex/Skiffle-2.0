@@ -12,6 +12,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
 import com.google.gson.JsonObject;
+import com.like.LikeButton;
+import com.like.OnLikeListener;
 import com.priyankvex.skiffle.R;
 import com.priyankvex.skiffle.SkiffleApp;
 import com.priyankvex.skiffle.component.DaggerShowAlbumDetailsComponent;
@@ -42,6 +44,9 @@ public class ShowAlbumDetailsActivity extends AppCompatActivity implements ShowA
     @BindView(R.id.viewpager)
     ViewPager mViewPager;
 
+    @BindView(R.id.button_like)
+    LikeButton buttonLike;
+
     @Inject
     ShowAlbumDetailsPresenter mPresenter;
 
@@ -65,7 +70,24 @@ public class ShowAlbumDetailsActivity extends AppCompatActivity implements ShowA
                 .skiffleApplicationComponent(SkiffleApp.getInstance().getComponent())
                 .build();
         mComponent.inject(this);
+        mPresenter.setSavedAlbum(getIntent().getBooleanExtra("is_saved", false));
         mPresenter.getAlbumDetails(getIntent().getStringExtra("album_id"));
+
+        buttonLike.setLiked(getIntent().getBooleanExtra("is_saved", false));
+        buttonLike.setOnLikeListener(new OnLikeListener() {
+            @Override
+            public void liked(LikeButton likeButton) {
+                // disable button to prevent multiple clicked
+                buttonLike.setEnabled(false);
+                mPresenter.saveAlbumTOFavorite();
+            }
+
+            @Override
+            public void unLiked(LikeButton likeButton) {
+                buttonLike.setEnabled(false);
+                mPresenter.deleteAlbumFromFavorites();
+            }
+        });
     }
 
     private void setUpToolbar(){
@@ -87,6 +109,16 @@ public class ShowAlbumDetailsActivity extends AppCompatActivity implements ShowA
     }
 
     @Override
+    public void reenableLikeButton() {
+        buttonLike.setEnabled(true);
+    }
+
+    @Override
+    public void setLikedButtonStatus(boolean likedStatus) {
+        buttonLike.setLiked(likedStatus);
+    }
+
+    @Override
     public void showErrorUi() {
         if (mDetailsFragment != null){
             mDetailsFragment.showErrorUi();
@@ -100,7 +132,6 @@ public class ShowAlbumDetailsActivity extends AppCompatActivity implements ShowA
     public void showAlbumDetails(Album album) {
         if (mDetailsFragment != null){
             mDetailsFragment.showAlbumDetails(album);
-            mPresenter.saveAlbumTOFavorite();
         }
     }
 

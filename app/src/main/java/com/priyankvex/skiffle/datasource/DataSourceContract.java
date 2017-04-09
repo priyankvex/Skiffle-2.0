@@ -21,6 +21,10 @@ public interface DataSourceContract {
 
     Observable<ArrayList<Album>> loadFavoriteAlbums();
 
+    Observable<Album> loadAlbumFromAlbumId(String albumId);
+
+    Observable<Long> deleteAlbumFromFavorites(String albumId);
+
     interface AuthRenewCallback {
         void onAuthRenewed();
         void onAuthFailed();

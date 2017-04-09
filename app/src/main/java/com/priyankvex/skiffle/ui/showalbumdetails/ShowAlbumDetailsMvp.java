@@ -15,10 +15,14 @@ public interface ShowAlbumDetailsMvp {
         void showErrorUi();
         void showAlbumDetails(Album album);
         void showTracks(Album album);
+        void reenableLikeButton();
+        void setLikedButtonStatus(boolean likedStatus);
     }
 
     interface ShowAldumDetailsPresenter{
         void getAlbumDetails(String albumId);
         void saveAlbumTOFavorite();
+        void setSavedAlbum(boolean status);
+        void deleteAlbumFromFavorites();
     }
 }

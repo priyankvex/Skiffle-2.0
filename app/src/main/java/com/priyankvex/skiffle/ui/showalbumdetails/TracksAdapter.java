@@ -67,7 +67,6 @@ class TracksAdapter extends RecyclerView.Adapter<TracksAdapter.ViewHolder>{
 
     @Override
     public int getItemCount() {
-        Log.d("owlcity", "No of songs 2 " + mTracks.size());
         return mTracks.size();
     }
 

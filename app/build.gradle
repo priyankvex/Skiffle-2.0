@@ -55,4 +55,7 @@ dependencies {
 
     // green DAO
     compile "org.greenrobot:greendao:$rootProject.green_dao_version"
+
+    // UI stuff
+    compile 'com.github.jd-alexander:LikeButton:0.2.0'
 }

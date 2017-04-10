@@ -6,4 +6,6 @@
     <string name="recommendations">Recommendations</string>
     <string name="about">About</string>
     <string name="favorites">Favorites</string>
+    <string name="search_hint">Search songs, albums and artists</string>
+    <string name="search">Search</string>
 </resources>

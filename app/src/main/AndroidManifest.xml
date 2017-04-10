@@ -13,14 +13,27 @@
         android:supportsRtl="true"
         android:name=".SkiffleApp"
         android:theme="@style/AppTheme.NoActionBar">
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <!-- enable the search dialog to send searches to SearchableActivity -->
+            <meta-data android:name="android.app.default_searchable"
+                android:value=".SearchableActivity" />
         </activity>
+
         <activity android:name=".ui.showalbumdetails.ShowAlbumDetailsActivity"/>
+
+        <activity android:name=".ui.search.SearchActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+            <meta-data android:name="android.app.searchable"
+                android:resource="@xml/searchable"/>
+        </activity>
+
     </application>
 
 </manifest>

@@ -4,8 +4,6 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-import com.priyankvex.skiffle.SkiffleApp;
-
 /**
  * Created by @priyankvex on 26/3/17.
  */

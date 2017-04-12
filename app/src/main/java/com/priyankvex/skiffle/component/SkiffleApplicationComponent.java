@@ -5,7 +5,6 @@ import android.content.Context;
 import com.priyankvex.skiffle.datasource.DataSourceContract;
 import com.priyankvex.skiffle.datasource.SpotifyAuthService;
 import com.priyankvex.skiffle.datasource.SpotifyService;
-import com.priyankvex.skiffle.model.DaoSession;
 import com.priyankvex.skiffle.module.DataSourceModule;
 import com.priyankvex.skiffle.module.PicassoModule;
 import com.priyankvex.skiffle.scope.SkiffleApplicationScope;

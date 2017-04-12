@@ -11,17 +11,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
-import com.google.gson.JsonObject;
 import com.like.LikeButton;
 import com.like.OnLikeListener;
 import com.priyankvex.skiffle.R;
 import com.priyankvex.skiffle.SkiffleApp;
 import com.priyankvex.skiffle.component.DaggerShowAlbumDetailsComponent;
 import com.priyankvex.skiffle.component.ShowAlbumDetailsComponent;
-import com.priyankvex.skiffle.model.Album;
+import com.priyankvex.skiffle.model.AlbumDetails;
 import com.priyankvex.skiffle.module.ShowAlbumDetailsModule;
-
-import java.util.ArrayList;
 
 import javax.inject.Inject;
 
@@ -129,14 +126,14 @@ public class ShowAlbumDetailsActivity extends AppCompatActivity implements ShowA
     }
 
     @Override
-    public void showAlbumDetails(Album album) {
+    public void showAlbumDetails(AlbumDetails album) {
         if (mDetailsFragment != null){
             mDetailsFragment.showAlbumDetails(album);
         }
     }
 
     @Override
-    public void showTracks(Album album) {
+    public void showTracks(AlbumDetails album) {
         if (mTracksFragment != null){
             mTracksFragment.showTracks(album);
         }

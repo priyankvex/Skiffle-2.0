@@ -9,8 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.priyankvex.skiffle.R;
-import com.priyankvex.skiffle.component.FavoritesComponent;
-import com.priyankvex.skiffle.model.Album;
+import com.priyankvex.skiffle.model.AlbumItem;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -44,7 +43,7 @@ class FavoriteAlbumsAdapter extends RecyclerView.Adapter<FavoriteAlbumsAdapter.V
 
     private FavoritesMvp.FavoritesView mCommunicator;
 
-    private ArrayList<Album> mAlbums;
+    private ArrayList<AlbumItem> mAlbums;
 
     @Inject
     FavoriteAlbumsAdapter(FavoritesMvp.FavoritesView communicator, Context context){
@@ -71,7 +70,7 @@ class FavoriteAlbumsAdapter extends RecyclerView.Adapter<FavoriteAlbumsAdapter.V
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Album item = mAlbums.get(position);
+        AlbumItem item = mAlbums.get(position);
         holder.textViewTitle.setText(item.name);
         holder.textViewArtist.setText(item.artists.get(0).name);
         holder.textViewType.setText(item.albumType);
@@ -85,7 +84,7 @@ class FavoriteAlbumsAdapter extends RecyclerView.Adapter<FavoriteAlbumsAdapter.V
         return mAlbums.size();
     }
 
-    void swapData(ArrayList<Album> items){
+    void swapData(ArrayList<AlbumItem> items){
         mAlbums.clear();
         mAlbums.addAll(items);
         notifyDataSetChanged();

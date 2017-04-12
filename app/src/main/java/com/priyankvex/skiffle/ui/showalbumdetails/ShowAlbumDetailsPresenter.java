@@ -2,10 +2,9 @@ package com.priyankvex.skiffle.ui.showalbumdetails;
 
 import android.util.Log;
 
-import com.google.gson.JsonObject;
 import com.priyankvex.skiffle.datasource.DataSourceContract;
 import com.priyankvex.skiffle.datasource.SpotifyService;
-import com.priyankvex.skiffle.model.Album;
+import com.priyankvex.skiffle.model.AlbumDetails;
 
 import java.util.Map;
 
@@ -27,9 +26,9 @@ class ShowAlbumDetailsPresenter implements ShowAlbumDetailsMvp.ShowAldumDetailsP
 
     private ShowAlbumDetailsMvp.ShowAlbumDetailsView mView;
 
-    private DisposableObserver<Album> mDisposableObserver;
+    private DisposableObserver<AlbumDetails> mDisposableObserver;
 
-    private Album mAlbum;
+    private AlbumDetails mAlbum;
 
     private boolean isSavedAlbum = false;
 
@@ -54,9 +53,9 @@ class ShowAlbumDetailsPresenter implements ShowAlbumDetailsMvp.ShowAldumDetailsP
 
     private void getAlbumDetailsFromLocalStorage(String albumId){
 
-        mDisposableObserver = new DisposableObserver<Album>() {
+        mDisposableObserver = new DisposableObserver<AlbumDetails>() {
             @Override
-            public void onNext(Album value) {
+            public void onNext(AlbumDetails value) {
                 if (value == null){
                     // couldn't find this album id in the database
                     mView.setLikedButtonStatus(false);
@@ -88,9 +87,9 @@ class ShowAlbumDetailsPresenter implements ShowAlbumDetailsMvp.ShowAldumDetailsP
 
     private void getAlbumDetailsFromRemoteApi(final String albumId){
 
-        mDisposableObserver = new DisposableObserver<Album>() {
+        mDisposableObserver = new DisposableObserver<AlbumDetails>() {
             @Override
-            public void onNext(Album value) {
+            public void onNext(AlbumDetails value) {
                 Log.d("owlcity", "Album Details of" + value.name);
                 mAlbum = value;
                 mView.showAlbumDetails(value);

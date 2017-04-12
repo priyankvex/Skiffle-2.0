@@ -1,6 +1,7 @@
 package com.priyankvex.skiffle.ui.home;
 
-import com.priyankvex.skiffle.model.NewRelease;
+import com.priyankvex.skiffle.model.AlbumItem;
+import com.priyankvex.skiffle.model.NewReleases;
 
 /**
  * Created by @priyankvex on 25/3/17.
@@ -10,8 +11,8 @@ public interface NewReleasesMvp {
 
     interface NewReleasesView{
         void showErrorUi(String errorMessage);
-        void showNewReleases(NewRelease newRelease);
-        void newReleaseItemClicked(int position, NewRelease.Album.Item item);
+        void showNewReleases(NewReleases newReleases);
+        void newReleaseItemClicked(int position, AlbumItem item);
     }
 
     interface NewReleasesPresenter{

@@ -1,15 +1,13 @@
 package com.priyankvex.skiffle.datasource;
 
-import com.google.gson.JsonObject;
-import com.priyankvex.skiffle.model.Album;
-import com.priyankvex.skiffle.model.NewRelease;
+import com.priyankvex.skiffle.model.AlbumDetails;
+import com.priyankvex.skiffle.model.NewReleases;
 
 import java.util.Map;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.HeaderMap;
-import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 
@@ -20,12 +18,12 @@ import retrofit2.http.Path;
 public interface SpotifyService {
 
     @GET("browse/new-releases")
-    Observable<NewRelease> getNewReleases(
+    Observable<NewReleases> getNewReleases(
             @HeaderMap Map<String, String> headers
     );
 
     @GET("albums/{id}")
-    Observable<Album> getAlbum(
+    Observable<AlbumDetails> getAlbum(
             @Path("id") String id,
             @HeaderMap Map<String, String> headers
     );

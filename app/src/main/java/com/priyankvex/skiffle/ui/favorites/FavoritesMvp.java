@@ -1,6 +1,6 @@
 package com.priyankvex.skiffle.ui.favorites;
 
-import com.priyankvex.skiffle.model.Album;
+import com.priyankvex.skiffle.model.AlbumItem;
 
 import java.util.ArrayList;
 
@@ -11,10 +11,10 @@ import java.util.ArrayList;
 public interface FavoritesMvp {
 
     interface FavoritesView{
-        void showFavoriteAlbums(ArrayList<Album> albums);
+        void showFavoriteAlbums(ArrayList<AlbumItem> albums);
         void showFavoriteTracks();
         void showEmptyAlbumsUi();
-        void onFavoriteAlbumItemClicked(int position, Album album);
+        void onFavoriteAlbumItemClicked(int position, AlbumItem album);
     }
 
     interface FavoritesPresenter{

@@ -4,7 +4,7 @@ import android.util.Log;
 
 import com.priyankvex.skiffle.datasource.DataSourceContract;
 import com.priyankvex.skiffle.datasource.SpotifyService;
-import com.priyankvex.skiffle.model.NewRelease;
+import com.priyankvex.skiffle.model.NewReleases;
 
 import java.util.Map;
 
@@ -28,7 +28,7 @@ public class NewReleasesPresenter implements NewReleasesMvp.NewReleasesPresenter
 
     private NewReleasesMvp.NewReleasesView mView;
 
-    private DisposableObserver<NewRelease> mDisposableObserver;
+    private DisposableObserver<NewReleases> mDisposableObserver;
 
     @Inject
     NewReleasesPresenter(SpotifyService spotifyService,
@@ -45,10 +45,10 @@ public class NewReleasesPresenter implements NewReleasesMvp.NewReleasesPresenter
      */
     @Override
     public void getNewReleases() {
-        mDisposableObserver = new DisposableObserver<NewRelease>() {
+        mDisposableObserver = new DisposableObserver<NewReleases>() {
             @Override
-            public void onNext(NewRelease newReleases) {
-                Log.d(getClass().getName(), newReleases.albums.items.size() + " releases received");
+            public void onNext(NewReleases newReleases) {
+                Log.d(getClass().getName(), newReleases.albums.items + " releases received");
                 mView.showNewReleases(newReleases);
             }
 

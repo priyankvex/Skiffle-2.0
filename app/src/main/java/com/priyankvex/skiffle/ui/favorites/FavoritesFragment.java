@@ -17,8 +17,7 @@ import com.priyankvex.skiffle.R;
 import com.priyankvex.skiffle.SkiffleApp;
 import com.priyankvex.skiffle.component.DaggerFavoritesComponent;
 import com.priyankvex.skiffle.component.FavoritesComponent;
-import com.priyankvex.skiffle.model.Album;
-import com.priyankvex.skiffle.model.NewRelease;
+import com.priyankvex.skiffle.model.AlbumItem;
 import com.priyankvex.skiffle.module.FavoritesModule;
 import com.priyankvex.skiffle.ui.showalbumdetails.ShowAlbumDetailsActivity;
 
@@ -71,7 +70,7 @@ public class FavoritesFragment extends Fragment implements FavoritesMvp.Favorite
     }
 
     @Override
-    public void showFavoriteAlbums(ArrayList<Album> albums) {
+    public void showFavoriteAlbums(ArrayList<AlbumItem> albums) {
         mFavoriteAlbumsFragment.showFavoriteAlbums(albums);
     }
 
@@ -86,7 +85,7 @@ public class FavoritesFragment extends Fragment implements FavoritesMvp.Favorite
     }
 
     @Override
-    public void onFavoriteAlbumItemClicked(int position, Album album) {
+    public void onFavoriteAlbumItemClicked(int position, AlbumItem album) {
         Log.d("owlcity", album.name + " clicked");
         Intent i = new Intent(getActivity(), ShowAlbumDetailsActivity.class);
         i.putExtra("album_id", album.id);

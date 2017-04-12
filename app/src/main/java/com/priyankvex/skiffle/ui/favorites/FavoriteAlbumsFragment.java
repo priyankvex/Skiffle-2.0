@@ -1,6 +1,5 @@
 package com.priyankvex.skiffle.ui.favorites;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,7 +11,7 @@ import android.view.ViewGroup;
 
 import com.priyankvex.skiffle.R;
 import com.priyankvex.skiffle.component.FavoritesComponent;
-import com.priyankvex.skiffle.model.Album;
+import com.priyankvex.skiffle.model.AlbumItem;
 
 import java.util.ArrayList;
 
@@ -54,7 +53,7 @@ public class FavoriteAlbumsFragment extends Fragment{
         this.mCommunicator = communicator;
     }
 
-    void showFavoriteAlbums(ArrayList<Album> albums){
+    void showFavoriteAlbums(ArrayList<AlbumItem> albums){
         mAdapter.swapData(albums);
     }
 

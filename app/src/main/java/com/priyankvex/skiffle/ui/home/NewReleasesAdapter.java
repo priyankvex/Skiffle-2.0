@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.priyankvex.skiffle.R;
-import com.priyankvex.skiffle.model.NewRelease;
+import com.priyankvex.skiffle.model.AlbumItem;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -43,7 +43,7 @@ class NewReleasesAdapter extends RecyclerView.Adapter<NewReleasesAdapter.ViewHol
 
     private NewReleasesMvp.NewReleasesView mCommunicator;
 
-    private ArrayList<NewRelease.Album.Item> newReleaseItems;
+    private ArrayList<AlbumItem> newReleaseItems;
 
     @Inject
     NewReleasesAdapter(NewReleasesMvp.NewReleasesView communicator, Context context){
@@ -70,7 +70,7 @@ class NewReleasesAdapter extends RecyclerView.Adapter<NewReleasesAdapter.ViewHol
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        NewRelease.Album.Item item = newReleaseItems.get(position);
+        AlbumItem item = newReleaseItems.get(position);
         holder.textViewTitle.setText(item.name);
         holder.textViewArtist.setText(item.artists.get(0).name);
         holder.textViewType.setText(item.type);
@@ -84,7 +84,7 @@ class NewReleasesAdapter extends RecyclerView.Adapter<NewReleasesAdapter.ViewHol
         return newReleaseItems.size();
     }
 
-    void swapData(ArrayList<NewRelease.Album.Item> items){
+    void swapData(ArrayList<AlbumItem> items){
         newReleaseItems.clear();
         newReleaseItems.addAll(items);
         notifyDataSetChanged();

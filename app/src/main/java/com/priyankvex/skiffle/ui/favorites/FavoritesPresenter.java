@@ -3,8 +3,7 @@ package com.priyankvex.skiffle.ui.favorites;
 import android.util.Log;
 
 import com.priyankvex.skiffle.datasource.DataSourceContract;
-import com.priyankvex.skiffle.model.Album;
-import com.priyankvex.skiffle.model.NewRelease;
+import com.priyankvex.skiffle.model.AlbumItem;
 
 import java.util.ArrayList;
 
@@ -24,7 +23,7 @@ class FavoritesPresenter implements FavoritesMvp.FavoritesPresenter{
 
     private FavoritesMvp.FavoritesView mView;
 
-    private DisposableObserver<ArrayList<Album>> mDisposableObserver;
+    private DisposableObserver<ArrayList<AlbumItem>> mDisposableObserver;
 
     @Inject
     FavoritesPresenter(DataSourceContract dataSource,
@@ -44,9 +43,9 @@ class FavoritesPresenter implements FavoritesMvp.FavoritesPresenter{
 
         Log.d("owlcity", "Loading tracks from database");
 
-        mDisposableObserver = new DisposableObserver<ArrayList<Album>>() {
+        mDisposableObserver = new DisposableObserver<ArrayList<AlbumItem>>() {
             @Override
-            public void onNext(ArrayList<Album> value) {
+            public void onNext(ArrayList<AlbumItem> value) {
                 Log.d("owlcity", "No. of favorite albums : " + value.size());
                 mView.showFavoriteAlbums(value);
             }

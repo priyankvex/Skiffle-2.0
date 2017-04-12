@@ -10,7 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.priyankvex.skiffle.R;
-import com.priyankvex.skiffle.model.Album;
+import com.priyankvex.skiffle.model.AlbumDetails;
+import com.priyankvex.skiffle.model.TrackItem;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -27,9 +28,9 @@ class TracksAdapter extends RecyclerView.Adapter<TracksAdapter.ViewHolder>{
 
     private ShowAlbumDetailsMvp.ShowAlbumDetailsView mCommunicator;
 
-    private ArrayList<Album.Track.Item> mTracks;
+    private ArrayList<TrackItem> mTracks;
 
-    private Album mAlbum;
+    private AlbumDetails mAlbum;
 
     @Inject
     TracksAdapter(ShowAlbumDetailsMvp.ShowAlbumDetailsView communicator, Context context){
@@ -56,7 +57,7 @@ class TracksAdapter extends RecyclerView.Adapter<TracksAdapter.ViewHolder>{
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Album.Track.Item item = mTracks.get(position);
+        TrackItem item = mTracks.get(position);
         holder.textViewTitle.setText(item.name);
         holder.textViewArtist.setText(mAlbum.artists.get(0).name);
         holder.textViewAlbum.setText(mAlbum.name);
@@ -70,7 +71,7 @@ class TracksAdapter extends RecyclerView.Adapter<TracksAdapter.ViewHolder>{
         return mTracks.size();
     }
 
-    void swapData(Album album){
+    void swapData(AlbumDetails album){
         this.mAlbum = album;
         mTracks.clear();
         mTracks.addAll(album.tracks.items);

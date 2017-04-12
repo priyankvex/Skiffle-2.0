@@ -13,7 +13,7 @@ import android.widget.ProgressBar;
 
 import com.priyankvex.skiffle.R;
 import com.priyankvex.skiffle.component.ShowAlbumDetailsComponent;
-import com.priyankvex.skiffle.model.Album;
+import com.priyankvex.skiffle.model.AlbumDetails;
 
 import javax.inject.Inject;
 
@@ -64,7 +64,7 @@ public class ShowAlbumTracksFragment extends Fragment {
 
     }
 
-    void showTracks(Album album){
+    void showTracks(AlbumDetails album){
         progressBar.setVisibility(View.INVISIBLE);
         mTracksAdapter.swapData(album);
     }

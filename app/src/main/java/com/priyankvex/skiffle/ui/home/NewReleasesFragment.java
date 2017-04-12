@@ -15,7 +15,8 @@ import com.priyankvex.skiffle.R;
 import com.priyankvex.skiffle.SkiffleApp;
 import com.priyankvex.skiffle.component.DaggerNewReleasesComponent;
 import com.priyankvex.skiffle.component.NewReleasesComponent;
-import com.priyankvex.skiffle.model.NewRelease;
+import com.priyankvex.skiffle.model.AlbumItem;
+import com.priyankvex.skiffle.model.NewReleases;
 import com.priyankvex.skiffle.module.NewReleasesModule;
 import com.priyankvex.skiffle.ui.showalbumdetails.ShowAlbumDetailsActivity;
 
@@ -65,12 +66,12 @@ public class NewReleasesFragment extends Fragment implements NewReleasesMvp.NewR
     }
 
     @Override
-    public void showNewReleases(NewRelease newRelease) {
+    public void showNewReleases(NewReleases newRelease) {
         mAdapter.swapData(newRelease.albums.items);
     }
 
     @Override
-    public void newReleaseItemClicked(int position, NewRelease.Album.Item item) {
+    public void newReleaseItemClicked(int position, AlbumItem item) {
         Log.d("owlcity", item.name + " clicked");
         Intent i = new Intent(getActivity(), ShowAlbumDetailsActivity.class);
         i.putExtra("album_id", item.id);

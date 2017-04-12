@@ -1,8 +1,8 @@
 package com.priyankvex.skiffle.component;
 
-import com.priyankvex.skiffle.ui.home.NewReleasesFragment;
 import com.priyankvex.skiffle.module.NewReleasesModule;
 import com.priyankvex.skiffle.scope.NewReleasesScope;
+import com.priyankvex.skiffle.ui.home.NewReleasesFragment;
 
 import dagger.Component;
 

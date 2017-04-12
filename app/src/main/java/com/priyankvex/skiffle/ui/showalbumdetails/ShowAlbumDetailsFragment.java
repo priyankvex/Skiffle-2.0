@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.priyankvex.skiffle.R;
-import com.priyankvex.skiffle.model.Album;
+import com.priyankvex.skiffle.model.AlbumDetails;
 import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
@@ -63,7 +63,7 @@ public class ShowAlbumDetailsFragment extends Fragment {
 
     }
 
-    void showAlbumDetails(Album album){
+    void showAlbumDetails(AlbumDetails album){
         Picasso.with(getContext())
                 .load(album.images.get(0).url)
                 .into(imageViewAlbumCover);

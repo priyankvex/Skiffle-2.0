@@ -1,6 +1,5 @@
 package com.priyankvex.skiffle.datasource;
 
-import com.google.gson.JsonObject;
 import com.priyankvex.skiffle.model.AuthToken;
 
 import java.util.Map;

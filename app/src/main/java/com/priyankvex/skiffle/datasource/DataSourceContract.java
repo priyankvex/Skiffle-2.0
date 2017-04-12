@@ -1,6 +1,7 @@
 package com.priyankvex.skiffle.datasource;
 
-import com.priyankvex.skiffle.model.Album;
+import com.priyankvex.skiffle.model.AlbumDetails;
+import com.priyankvex.skiffle.model.AlbumItem;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -17,11 +18,11 @@ public interface DataSourceContract {
 
     void renewAuthToken(AuthRenewCallback callback);
 
-    Observable<Long> saveAlbumToFavorite(Album album);
+    Observable<Long> saveAlbumToFavorite(AlbumDetails album);
 
-    Observable<ArrayList<Album>> loadFavoriteAlbums();
+    Observable<ArrayList<AlbumItem>> loadFavoriteAlbums();
 
-    Observable<Album> loadAlbumFromAlbumId(String albumId);
+    Observable<AlbumDetails> loadAlbumFromAlbumId(String albumId);
 
     Observable<Long> deleteAlbumFromFavorites(String albumId);
 

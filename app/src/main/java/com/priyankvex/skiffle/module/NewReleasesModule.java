@@ -1,7 +1,7 @@
 package com.priyankvex.skiffle.module;
 
-import com.priyankvex.skiffle.ui.home.NewReleasesMvp;
 import com.priyankvex.skiffle.scope.NewReleasesScope;
+import com.priyankvex.skiffle.ui.home.NewReleasesMvp;
 
 import dagger.Module;
 import dagger.Provides;

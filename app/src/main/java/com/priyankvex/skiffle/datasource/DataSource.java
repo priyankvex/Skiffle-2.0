@@ -2,21 +2,18 @@ package com.priyankvex.skiffle.datasource;
 
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.support.v4.content.ContextCompat;
 import android.util.Base64;
 import android.util.Log;
 
 import com.google.gson.Gson;
 import com.priyankvex.skiffle.R;
 import com.priyankvex.skiffle.SkiffleApp;
-import com.priyankvex.skiffle.model.Album;
+import com.priyankvex.skiffle.model.AlbumDetails;
 import com.priyankvex.skiffle.model.AlbumEntity;
 import com.priyankvex.skiffle.model.AlbumEntityDao;
+import com.priyankvex.skiffle.model.AlbumItem;
 import com.priyankvex.skiffle.model.AuthToken;
 import com.priyankvex.skiffle.model.DaoSession;
-import com.priyankvex.skiffle.model.NewRelease;
-
-import org.reactivestreams.Subscriber;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,12 +22,9 @@ import java.util.Map;
 import java.util.concurrent.Callable;
 
 import io.reactivex.Observable;
-import io.reactivex.Single;
-import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
-import retrofit2.http.HeaderMap;
 
 /**
  * Created by @priyankvex on 25/3/17.
@@ -143,7 +137,7 @@ public class DataSource implements DataSourceContract{
     }
 
     @Override
-    public Observable<Long> saveAlbumToFavorite(final Album album) {
+    public Observable<Long> saveAlbumToFavorite(final AlbumDetails album) {
 
         return Observable.fromCallable(new Callable<Long>() {
             @Override
@@ -169,17 +163,23 @@ public class DataSource implements DataSourceContract{
     }
 
     @Override
-    public Observable<ArrayList<Album>> loadFavoriteAlbums() {
-        return Observable.fromCallable(new Callable<ArrayList<Album>>() {
+    public Observable<ArrayList<AlbumItem>> loadFavoriteAlbums() {
+        return Observable.fromCallable(new Callable<ArrayList<AlbumItem>>() {
             @Override
-            public ArrayList<Album> call() throws Exception {
+            public ArrayList<AlbumItem> call() throws Exception {
                 List<AlbumEntity> albumEntities = mDaoSession.getAlbumEntityDao().loadAll();
-                ArrayList<Album> albums = new ArrayList<>(5);
+                ArrayList<AlbumItem> albums = new ArrayList<>(5);
                 for (AlbumEntity entity : albumEntities){
-                    Album album = mGson.fromJson(entity.getAlbumJsonData(), Album.class);
+                    AlbumDetails album = mGson.fromJson(entity.getAlbumJsonData(), AlbumDetails.class);
                     // drop the tracks to trim the size of the object
-                    album.tracks = null;
-                    albums.add(album);
+                    AlbumItem item = new AlbumItem();
+                    item.name = album.name;
+                    item.id = album.id;
+                    item.albumType = album.albumType;
+                    item.artists = album.artists;
+                    item.type = album.type;
+                    item.images = album.images;
+                    albums.add(item);
                 }
                 return albums;
             }
@@ -201,10 +201,10 @@ public class DataSource implements DataSourceContract{
     }
 
     @Override
-    public Observable<Album> loadAlbumFromAlbumId(final String albumId) {
-        return Observable.fromCallable(new Callable<Album>() {
+    public Observable<AlbumDetails> loadAlbumFromAlbumId(final String albumId) {
+        return Observable.fromCallable(new Callable<AlbumDetails>() {
             @Override
-            public Album call() throws Exception {
+            public AlbumDetails call() throws Exception {
                 List<AlbumEntity> albums = mDaoSession.getAlbumEntityDao()
                         .queryBuilder().where(AlbumEntityDao.Properties.AlbumId.eq(albumId))
                         .limit(1)
@@ -214,8 +214,7 @@ public class DataSource implements DataSourceContract{
                     return null;
                 }
                 else{
-                    Album album = mGson.fromJson(albums.get(0).getAlbumJsonData(), Album.class);
-                    return album;
+                    return mGson.fromJson(albums.get(0).getAlbumJsonData(), AlbumDetails.class);
                 }
             }
         });

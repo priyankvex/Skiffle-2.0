@@ -1,9 +1,6 @@
 package com.priyankvex.skiffle.ui.showalbumdetails;
 
-import com.google.gson.JsonObject;
-import com.priyankvex.skiffle.model.Album;
-
-import java.util.ArrayList;
+import com.priyankvex.skiffle.model.AlbumDetails;
 
 /**
  * Created by @priyankvex on 28/3/17.
@@ -13,8 +10,8 @@ public interface ShowAlbumDetailsMvp {
 
     interface ShowAlbumDetailsView{
         void showErrorUi();
-        void showAlbumDetails(Album album);
-        void showTracks(Album album);
+        void showAlbumDetails(AlbumDetails album);
+        void showTracks(AlbumDetails album);
         void reenableLikeButton();
         void setLikedButtonStatus(boolean likedStatus);
     }

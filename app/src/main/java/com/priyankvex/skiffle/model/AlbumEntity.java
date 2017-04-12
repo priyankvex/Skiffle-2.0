@@ -1,8 +1,8 @@
 package com.priyankvex.skiffle.model;
 
 import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.annotation.Id;
 
 /**
  * Created by @priyankvex on 7/4/17.

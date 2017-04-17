@@ -30,7 +30,7 @@ public interface SpotifyService {
             @HeaderMap Map<String, String> headers
     );
 
-    @GET("search?type=track,artist,album&limit=1")
+    @GET("search?type=track,artist,album&limit=3")
     Observable<SearchResults> getSearchResults(
             @Query("q") String query,
             @HeaderMap Map<String, String> headers

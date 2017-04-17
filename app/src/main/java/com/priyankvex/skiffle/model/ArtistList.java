@@ -8,5 +8,5 @@ import java.util.ArrayList;
 
 public class ArtistList {
 
-    public ArrayList<ArtistItem> artists;
+    public ArrayList<ArtistItem> items;
 }

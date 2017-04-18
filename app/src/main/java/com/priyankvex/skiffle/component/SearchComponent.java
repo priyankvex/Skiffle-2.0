@@ -2,6 +2,7 @@ package com.priyankvex.skiffle.component;
 
 import com.priyankvex.skiffle.module.SearchModule;
 import com.priyankvex.skiffle.scope.SearchScope;
+import com.priyankvex.skiffle.ui.search.ResultsPreviewFragment;
 import com.priyankvex.skiffle.ui.search.SearchActivity;
 
 import dagger.Component;
@@ -14,4 +15,5 @@ import dagger.Component;
 public interface SearchComponent {
 
     void inject(SearchActivity activity);
+    void inject(ResultsPreviewFragment fragment);
 }

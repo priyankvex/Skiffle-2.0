@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="#dedede">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="Songs"
+        android:textColor="@color/colorPrimaryDark"
+        android:id="@+id/text_view_header_title"
+        android:layout_marginLeft="20dp"/>
+
+    <TextView
+        android:id="@+id/button_view_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="View More"
+        android:layout_alignBaseline="@+id/text_view_header_title"
+        android:layout_alignBottom="@+id/text_view_header_title"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="20dp" />
+
+</RelativeLayout>

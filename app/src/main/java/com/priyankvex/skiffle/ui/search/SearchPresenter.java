@@ -49,9 +49,7 @@ public class SearchPresenter implements SearchMvp.SearchPresenter{
         mDisposableObserver = new DisposableObserver<ArrayList<SearchResultsListItem>>() {
             @Override
             public void onNext(ArrayList<SearchResultsListItem> value) {
-                Log.d("owlcity", value.get(1).title + " first song in search results");
-                Log.d("owlcity", value.get(5).title + " first album in search results");
-                Log.d("owlcity", value.get(9).title + " first artist in search results");
+                mView.showSearchResults(value);
             }
 
             @Override
@@ -94,12 +92,15 @@ public class SearchPresenter implements SearchMvp.SearchPresenter{
             songItem.title = track.name;
             songItem.subTitle = track.album.name;
             songItem.itemType = SearchResultsListItem.ItemType.TRACK;
+            if (track.album.images.size() >= 3){
+                songItem.thumbImageUrl = track.album.images.get(2).url;
+            }
             list.add(songItem);
         }
         // second album header
         SearchResultsListItem albumHeaderItem = new SearchResultsListItem();
-        songHeaderItem.viewType = SearchResultsListItem.ViewType.HEADER_VIEW;
-        songHeaderItem.title = "Albums";
+        albumHeaderItem.viewType = SearchResultsListItem.ViewType.HEADER_VIEW;
+        albumHeaderItem.title = "Albums";
         list.add(albumHeaderItem);
         // add the albums search preview results
         for (AlbumItem album : searchResults.albums.items){
@@ -108,12 +109,15 @@ public class SearchPresenter implements SearchMvp.SearchPresenter{
             albumItem.title = album.name;
             albumItem.subTitle = album.artists.get(0).name;
             albumItem.itemType = SearchResultsListItem.ItemType.ALBUM;
+            if (album.images.size() >= 3){
+                albumItem.thumbImageUrl = album.images.get(2).url;
+            }
             list.add(albumItem);
         }
         // third items header
         SearchResultsListItem artistsHeaderItem = new SearchResultsListItem();
-        songHeaderItem.viewType = SearchResultsListItem.ViewType.HEADER_VIEW;
-        songHeaderItem.title = "Artists";
+        artistsHeaderItem.viewType = SearchResultsListItem.ViewType.HEADER_VIEW;
+        artistsHeaderItem.title = "Artists";
         list.add(artistsHeaderItem);
         // add the albums search preview results
         for (ArtistItem artist : searchResults.artists.items){
@@ -122,6 +126,9 @@ public class SearchPresenter implements SearchMvp.SearchPresenter{
             artistItem.title = artist.name;
             artistItem.subTitle = artist.type;
             artistItem.itemType = SearchResultsListItem.ItemType.ARTIST;
+            if (artist.images.size() >= 3){
+                artistItem.thumbImageUrl = artist.images.get(2).url;
+            }
             list.add(artistItem);
         }
         return list;

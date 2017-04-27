@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.priyankvex.skiffle.R;
 import com.priyankvex.skiffle.model.SearchResultsListItem;
+import com.priyankvex.skiffle.model.TrackItem;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ import javax.inject.Inject;
  * Created by priyankvex on 18/4/17.
  */
 
-public class SearchResultsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class PreviewSearchResultsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int TYPE_HEADER = 0;
     private static final int TYPE_ITEM = 1;
 
@@ -32,7 +33,7 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<RecyclerView.View
     private SearchMvp.SearchView mCommunicator;
 
     @Inject
-    public SearchResultsAdapter(SearchMvp.SearchView communicator, Context context) {
+    public PreviewSearchResultsAdapter(SearchMvp.SearchView communicator, Context context) {
         this.data = new ArrayList<>();
         this.mContext = context;
         this.mCommunicator = communicator;
@@ -53,6 +54,13 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<RecyclerView.View
             //inflate your layout and pass it to view holder
             View v1 = inflater.inflate(R.layout.list_header_search_results, parent, false);
             viewHolder = new HeaderViewHolder(v1);
+            v1.findViewById(R.id.button_view_more).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = viewHolder.getAdapterPosition();
+                    mCommunicator.onSearchResultsPreviewItemClicked(data.get(position), position);
+                }
+            });
         }
         else {
             viewHolder = null;
@@ -66,7 +74,10 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<RecyclerView.View
             @Override
             public void onClick(View v) {
                 int position = viewHolder.getAdapterPosition();
-                mCommunicator.onSearchResultsPreviewItemClicked(data.get(position), position);
+                SearchResultsListItem item = data.get(position);
+                if (item.viewType == SearchResultsListItem.ViewType.ITEM_VIEW){
+                    mCommunicator.onSearchResultsPreviewItemClicked(data.get(position), position);
+                }
             }
         });
         return viewHolder;

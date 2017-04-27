@@ -1,8 +1,11 @@
 package com.priyankvex.skiffle.datasource;
 
 import com.priyankvex.skiffle.model.AlbumDetails;
+import com.priyankvex.skiffle.model.AlbumList;
+import com.priyankvex.skiffle.model.ArtistList;
 import com.priyankvex.skiffle.model.NewReleases;
 import com.priyankvex.skiffle.model.SearchResults;
+import com.priyankvex.skiffle.model.TrackList;
 
 import java.util.Map;
 
@@ -36,4 +39,21 @@ public interface SpotifyService {
             @HeaderMap Map<String, String> headers
     );
 
+    @GET("search?type=track&limit=20")
+    Observable<SearchResults> getSongResults(
+            @Query("q") String query,
+            @HeaderMap Map<String, String> headers
+    );
+
+    @GET("search?type=album&limit=20")
+    Observable<SearchResults> getAlbumResults(
+            @Query("q") String query,
+            @HeaderMap Map<String, String> headers
+    );
+
+    @GET("search?type=artist&limit=20")
+    Observable<SearchResults> getArtistResults(
+            @Query("q") String query,
+            @HeaderMap Map<String, String> headers
+    );
 }

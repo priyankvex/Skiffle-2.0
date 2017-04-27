@@ -5,9 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.provider.SearchRecentSuggestions;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
@@ -17,8 +17,8 @@ import com.priyankvex.skiffle.component.DaggerSearchComponent;
 import com.priyankvex.skiffle.component.SearchComponent;
 import com.priyankvex.skiffle.datasource.SearchSuggestionsProvider;
 import com.priyankvex.skiffle.model.SearchResultsListItem;
+import com.priyankvex.skiffle.model.TrackList;
 import com.priyankvex.skiffle.module.SearchModule;
-import com.priyankvex.skiffle.ui.home.NewReleasesFragment;
 import com.priyankvex.skiffle.util.ActivityUtil;
 
 import java.util.ArrayList;
@@ -33,7 +33,8 @@ import butterknife.ButterKnife;
  */
 
 public class SearchActivity extends AppCompatActivity implements SearchMvp.SearchView,
-        ResultsPreviewFragment.ResultsPreviewCommunicator{
+        ResultsPreviewFragment.ResultsPreviewCommunicator,
+        SearchResultsFragment.SearchResultsFragmentCommunicator {
 
     @Inject
     SearchPresenter mPresenter;
@@ -42,6 +43,8 @@ public class SearchActivity extends AppCompatActivity implements SearchMvp.Searc
     Toolbar toolbar;
 
     private ResultsPreviewFragment mResultsPreviewFragment;
+
+    private SearchResultsFragment mSearchResultsFragment;
 
     private SearchComponent mComponent;
 
@@ -73,7 +76,7 @@ public class SearchActivity extends AppCompatActivity implements SearchMvp.Searc
             mResultsPreviewFragment = ResultsPreviewFragment.getInstance();
         }
         ActivityUtil.replaceFragmentInContainer(getSupportFragmentManager(),
-                mResultsPreviewFragment, R.id.container);
+                mResultsPreviewFragment, R.id.container, "results_preview_fragment");
 
     }
 
@@ -83,13 +86,58 @@ public class SearchActivity extends AppCompatActivity implements SearchMvp.Searc
     }
 
     @Override
+    public void showSongResults(TrackList trackList) {
+        mSearchResultsFragment.showSongs(trackList);
+    }
+
+    @Override
     public void onSearchResultsPreviewItemClicked(SearchResultsListItem item, int position) {
         Log.d("owlcity", "Item clicked is a : " + item.itemType);
+        if (item.viewType == SearchResultsListItem.ViewType.HEADER_VIEW){
+            switch (item.title){
+                case "Songs" :
+                    mSearchResultsFragment = SearchResultsFragment.getInstance("songs");
+                    break;
+                case "Albums" :
+                    mSearchResultsFragment = SearchResultsFragment.getInstance("albums");
+                    break;
+                case "Artists" :
+                    mSearchResultsFragment = SearchResultsFragment.getInstance("artists");
+                    break;
+                default:
+                    mSearchResultsFragment = SearchResultsFragment.getInstance("songs");
+            }
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            //find the fragment by View or Tag
+            ResultsPreviewFragment frag = (ResultsPreviewFragment)
+                    fragmentManager.findFragmentByTag("results_preview_fragment");
+            fragmentTransaction.hide(frag);
+            fragmentTransaction.add(R.id.container, mSearchResultsFragment);
+            fragmentTransaction.addToBackStack("show_details");
+            fragmentTransaction.commit();
+        }
     }
 
     @Override
     public SearchComponent getSearchComponent() {
         return mComponent;
+    }
+
+    @Override
+    public void loadSongsForSearch() {
+        String query = getIntent().getStringExtra(SearchManager.QUERY);
+        mPresenter.getSongResults(query);
+    }
+
+    @Override
+    public void loadAlbumsForSearch() {
+
+    }
+
+    @Override
+    public void loadArtistsForSearch() {
+
     }
 
     private void setUpToolbar(String title){

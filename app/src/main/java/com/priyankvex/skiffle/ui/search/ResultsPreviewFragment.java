@@ -32,7 +32,7 @@ public class ResultsPreviewFragment extends Fragment{
     }
 
     @Inject
-    SearchResultsAdapter mAdapter;
+    PreviewSearchResultsAdapter mAdapter;
 
     private ResultsPreviewCommunicator mCommunicator;
 

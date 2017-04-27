@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements
         mNavigationView.setNavigationItemSelectedListener(this);
         // always start with new release fragment
         ActivityUtil.replaceFragmentInContainer(getSupportFragmentManager(),
-                new NewReleasesFragment(), R.id.container);
+                new NewReleasesFragment(), R.id.container, "nav_frag");
     }
 
     protected void setUpToolbar(String title){
@@ -67,12 +67,12 @@ public class MainActivity extends AppCompatActivity implements
         switch (id){
             case R.id.item_home:
                 ActivityUtil.replaceFragmentInContainer(getSupportFragmentManager(),
-                        new NewReleasesFragment(), R.id.container);
+                        new NewReleasesFragment(), R.id.container, "nav_frag");
                 break;
 
             case R.id.item_favorites:
                 ActivityUtil.replaceFragmentInContainer(getSupportFragmentManager(),
-                        new FavoritesFragment(), R.id.container);
+                        new FavoritesFragment(), R.id.container, "nav_frag");
                 break;
         }
         item.setChecked(true);

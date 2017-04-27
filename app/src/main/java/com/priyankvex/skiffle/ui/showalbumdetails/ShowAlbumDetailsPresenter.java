@@ -56,7 +56,7 @@ class ShowAlbumDetailsPresenter implements ShowAlbumDetailsMvp.ShowAldumDetailsP
         mDisposableObserver = new DisposableObserver<AlbumDetails>() {
             @Override
             public void onNext(AlbumDetails value) {
-                if (value == null){
+                if (value.id.equals("album_not_found")){
                     // couldn't find this album id in the database
                     mView.setLikedButtonStatus(false);
                 }
@@ -64,12 +64,12 @@ class ShowAlbumDetailsPresenter implements ShowAlbumDetailsMvp.ShowAldumDetailsP
                     mView.setLikedButtonStatus(true);
                     mAlbum = value;
                     mView.showAlbumDetails(value);
-                    mView.showTracks(value);
                 }
             }
 
             @Override
             public void onError(Throwable e) {
+                Log.d("owlcity", "Error loading album details from local storage : " + e.getLocalizedMessage());
                 mView.showErrorUi();
             }
 
@@ -90,17 +90,15 @@ class ShowAlbumDetailsPresenter implements ShowAlbumDetailsMvp.ShowAldumDetailsP
         mDisposableObserver = new DisposableObserver<AlbumDetails>() {
             @Override
             public void onNext(AlbumDetails value) {
-                Log.d("owlcity", "Album Details of" + value.name);
                 mAlbum = value;
                 mView.showAlbumDetails(value);
-                mView.showTracks(value);
                 // to check whether this album is in favorites or not
                 getAlbumDetailsFromLocalStorage(albumId);
             }
 
             @Override
             public void onError(Throwable e) {
-                Log.d("owlcity", e.getLocalizedMessage());
+                Log.d("owlcity", "Error loading album details from API : " + e.getLocalizedMessage());
                 mView.showErrorUi();
             }
 
@@ -168,5 +166,10 @@ class ShowAlbumDetailsPresenter implements ShowAlbumDetailsMvp.ShowAldumDetailsP
     @Override
     public void setSavedAlbum(boolean savedAlbum) {
         isSavedAlbum = savedAlbum;
+    }
+
+    @Override
+    public AlbumDetails getAlbumDetails() {
+        return mAlbum;
     }
 }

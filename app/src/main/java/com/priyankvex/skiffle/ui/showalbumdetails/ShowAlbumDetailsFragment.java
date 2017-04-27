@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,6 +57,8 @@ public class ShowAlbumDetailsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_show_album_details, container, false);
         ButterKnife.bind(this, rootView);
+        Log.d("owlcity", "Done creating album details fragment");
+        mCommunicator.getAlbumDetails();
         return rootView;
     }
 
@@ -64,6 +67,7 @@ public class ShowAlbumDetailsFragment extends Fragment {
     }
 
     void showAlbumDetails(AlbumDetails album){
+        Log.d("owlcity", "Showing album details");
         Picasso.with(getContext())
                 .load(album.images.get(0).url)
                 .into(imageViewAlbumCover);
@@ -75,6 +79,6 @@ public class ShowAlbumDetailsFragment extends Fragment {
     }
 
     interface AlbumDetailsCommunicator {
-
+        void getAlbumDetails();
     }
 }

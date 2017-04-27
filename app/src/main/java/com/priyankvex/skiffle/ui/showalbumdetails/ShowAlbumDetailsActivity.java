@@ -10,6 +10,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.like.LikeButton;
 import com.like.OnLikeListener;
@@ -44,6 +46,9 @@ public class ShowAlbumDetailsActivity extends AppCompatActivity implements ShowA
     @BindView(R.id.button_like)
     LikeButton buttonLike;
 
+    @BindView(R.id.progress_bar)
+    ProgressBar progressBar;
+
     @Inject
     ShowAlbumDetailsPresenter mPresenter;
 
@@ -60,13 +65,12 @@ public class ShowAlbumDetailsActivity extends AppCompatActivity implements ShowA
         ButterKnife.bind(this);
         setUpToolbar();
         setUpTabLayout();
-        setUpViewPager();
-        Log.d("owlcity", "Album id : " + getIntent().getStringExtra("album_id"));
         mComponent = DaggerShowAlbumDetailsComponent.builder()
                 .showAlbumDetailsModule(new ShowAlbumDetailsModule(this))
                 .skiffleApplicationComponent(SkiffleApp.getInstance().getComponent())
                 .build();
         mComponent.inject(this);
+
         mPresenter.setSavedAlbum(getIntent().getBooleanExtra("is_saved", false));
         mPresenter.getAlbumDetails(getIntent().getStringExtra("album_id"));
 
@@ -117,26 +121,27 @@ public class ShowAlbumDetailsActivity extends AppCompatActivity implements ShowA
 
     @Override
     public void showErrorUi() {
-        if (mDetailsFragment != null){
-            mDetailsFragment.showErrorUi();
-        }
-        if (mTracksFragment != null){
-            mTracksFragment.showErrorUi();
-        }
+        progressBar.setVisibility(View.GONE);
+        mViewPager.setVisibility(View.GONE);
+        buttonLike.setVisibility(View.GONE);
     }
 
     @Override
     public void showAlbumDetails(AlbumDetails album) {
-        if (mDetailsFragment != null){
-            mDetailsFragment.showAlbumDetails(album);
-        }
+        mViewPager.setVisibility(View.VISIBLE);
+        buttonLike.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.GONE);
+        setUpViewPager();
     }
 
     @Override
-    public void showTracks(AlbumDetails album) {
-        if (mTracksFragment != null){
-            mTracksFragment.showTracks(album);
-        }
+    public void getAlbumDetails() {
+        mDetailsFragment.showAlbumDetails(mPresenter.getAlbumDetails());
+    }
+
+    @Override
+    public void getAlbumTracks() {
+        mTracksFragment.showTracks(mPresenter.getAlbumDetails());
     }
 
     @Override

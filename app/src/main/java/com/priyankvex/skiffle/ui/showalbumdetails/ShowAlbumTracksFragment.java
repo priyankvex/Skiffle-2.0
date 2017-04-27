@@ -57,6 +57,7 @@ public class ShowAlbumTracksFragment extends Fragment {
         mCommunicator.getComponent().inject(this);
         recyclerView.setAdapter(mTracksAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mCommunicator.getAlbumTracks();
         return rootView;
     }
 
@@ -71,5 +72,6 @@ public class ShowAlbumTracksFragment extends Fragment {
 
     interface AlbumTracksCommunicator {
         ShowAlbumDetailsComponent getComponent();
+        void getAlbumTracks();
     }
 }

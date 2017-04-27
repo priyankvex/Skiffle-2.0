@@ -11,7 +11,6 @@ public interface ShowAlbumDetailsMvp {
     interface ShowAlbumDetailsView{
         void showErrorUi();
         void showAlbumDetails(AlbumDetails album);
-        void showTracks(AlbumDetails album);
         void reenableLikeButton();
         void setLikedButtonStatus(boolean likedStatus);
     }
@@ -21,5 +20,6 @@ public interface ShowAlbumDetailsMvp {
         void saveAlbumTOFavorite();
         void setSavedAlbum(boolean status);
         void deleteAlbumFromFavorites();
+        AlbumDetails getAlbumDetails();
     }
 }

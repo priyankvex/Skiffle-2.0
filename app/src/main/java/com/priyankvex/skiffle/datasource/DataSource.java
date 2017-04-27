@@ -211,7 +211,11 @@ public class DataSource implements DataSourceContract{
                         .build()
                         .list();
                 if (albums == null || albums.size() == 0){
-                    return null;
+                    // return a pseudo element representing that no element was found
+                    // this has been done because RxJava 2.xx doesn't allow null as stream element
+                    AlbumDetails pseudoAlbum = new AlbumDetails();
+                    pseudoAlbum.id = "album_not_found";
+                    return pseudoAlbum;
                 }
                 else{
                     return mGson.fromJson(albums.get(0).getAlbumJsonData(), AlbumDetails.class);

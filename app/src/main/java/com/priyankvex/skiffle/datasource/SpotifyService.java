@@ -1,11 +1,10 @@
 package com.priyankvex.skiffle.datasource;
 
 import com.priyankvex.skiffle.model.AlbumDetails;
-import com.priyankvex.skiffle.model.AlbumList;
-import com.priyankvex.skiffle.model.ArtistList;
+import com.priyankvex.skiffle.model.ArtistDetails;
+import com.priyankvex.skiffle.model.ArtistTopTracks;
 import com.priyankvex.skiffle.model.NewReleases;
 import com.priyankvex.skiffle.model.SearchResults;
-import com.priyankvex.skiffle.model.TrackList;
 
 import java.util.Map;
 
@@ -29,6 +28,18 @@ public interface SpotifyService {
 
     @GET("albums/{id}")
     Observable<AlbumDetails> getAlbum(
+            @Path("id") String id,
+            @HeaderMap Map<String, String> headers
+    );
+
+    @GET("artists/{id}")
+    Observable<ArtistDetails> getArtist(
+            @Path("id") String id,
+            @HeaderMap Map<String, String> headers
+    );
+
+    @GET("artists/{id}/top-tracks?country=US")
+    Observable<ArtistTopTracks> getArtistTopTracks(
             @Path("id") String id,
             @HeaderMap Map<String, String> headers
     );

@@ -16,11 +16,16 @@ import com.priyankvex.skiffle.SkiffleApp;
 import com.priyankvex.skiffle.component.DaggerSearchComponent;
 import com.priyankvex.skiffle.component.SearchComponent;
 import com.priyankvex.skiffle.datasource.SearchSuggestionsProvider;
+import com.priyankvex.skiffle.model.AlbumItem;
 import com.priyankvex.skiffle.model.AlbumList;
+import com.priyankvex.skiffle.model.ArtistItem;
 import com.priyankvex.skiffle.model.ArtistList;
 import com.priyankvex.skiffle.model.SearchResultsListItem;
+import com.priyankvex.skiffle.model.TrackItem;
 import com.priyankvex.skiffle.model.TrackList;
 import com.priyankvex.skiffle.module.SearchModule;
+import com.priyankvex.skiffle.ui.showalbumdetails.ShowAlbumDetailsActivity;
+import com.priyankvex.skiffle.ui.showartistdetails.ShowArtistDetailsActivity;
 import com.priyankvex.skiffle.util.ActivityUtil;
 
 import java.util.ArrayList;
@@ -129,6 +134,24 @@ public class SearchActivity extends AppCompatActivity implements SearchMvp.Searc
             fragmentTransaction.addToBackStack("show_details");
             fragmentTransaction.commit();
         }
+    }
+
+    @Override
+    public void onArtistItemClicked(ArtistItem item, int position) {
+        Intent intent = new Intent(this, ShowArtistDetailsActivity.class);
+        intent.putExtra("artist_id", item.id);
+        intent.putExtra("artist_title", item.name);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onTrackItemClicked(TrackItem item, int position) {
+
+    }
+
+    @Override
+    public void onAlbumItemClicked(AlbumItem item, int position) {
+
     }
 
     @Override

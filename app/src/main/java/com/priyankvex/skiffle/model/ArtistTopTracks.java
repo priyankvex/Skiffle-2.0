@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Created by priyankvex on 13/4/17.
  */
 
-public class AristTopTracks {
+public class ArtistTopTracks {
 
     public ArrayList<TrackItem> tracks;
 }

@@ -16,6 +16,8 @@ import com.priyankvex.skiffle.SkiffleApp;
 import com.priyankvex.skiffle.component.DaggerSearchComponent;
 import com.priyankvex.skiffle.component.SearchComponent;
 import com.priyankvex.skiffle.datasource.SearchSuggestionsProvider;
+import com.priyankvex.skiffle.model.AlbumList;
+import com.priyankvex.skiffle.model.ArtistList;
 import com.priyankvex.skiffle.model.SearchResultsListItem;
 import com.priyankvex.skiffle.model.TrackList;
 import com.priyankvex.skiffle.module.SearchModule;
@@ -91,6 +93,16 @@ public class SearchActivity extends AppCompatActivity implements SearchMvp.Searc
     }
 
     @Override
+    public void showAlbumSearchResults(AlbumList albumList) {
+        mSearchResultsFragment.showAlbums(albumList);
+    }
+
+    @Override
+    public void showArtistSearchResults(ArtistList artistList) {
+        mSearchResultsFragment.showArtists(artistList);
+    }
+
+    @Override
     public void onSearchResultsPreviewItemClicked(SearchResultsListItem item, int position) {
         Log.d("owlcity", "Item clicked is a : " + item.itemType);
         if (item.viewType == SearchResultsListItem.ViewType.HEADER_VIEW){
@@ -132,12 +144,14 @@ public class SearchActivity extends AppCompatActivity implements SearchMvp.Searc
 
     @Override
     public void loadAlbumsForSearch() {
-
+        String query = getIntent().getStringExtra(SearchManager.QUERY);
+        mPresenter.getAlbumResults(query);
     }
 
     @Override
     public void loadArtistsForSearch() {
-
+        String query = getIntent().getStringExtra(SearchManager.QUERY);
+        mPresenter.getArtistResults(query);
     }
 
     private void setUpToolbar(String title){

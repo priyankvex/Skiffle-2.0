@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.priyankvex.skiffle.R;
+import com.priyankvex.skiffle.model.AlbumList;
+import com.priyankvex.skiffle.model.ArtistList;
 import com.priyankvex.skiffle.model.TrackList;
 
 import butterknife.BindView;
@@ -48,8 +50,23 @@ public class SearchResultsFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_search_results, container, false);
         ButterKnife.bind(this, rootView);
-        mCommunicator.loadSongsForSearch();
+        String searchResultsType = getArguments().getString("result_type");
+        loadSearchResults(searchResultsType);
         return rootView;
+    }
+
+    private void loadSearchResults(String searchResultsType){
+        switch (searchResultsType){
+            case "songs":
+                mCommunicator.loadSongsForSearch();
+                break;
+            case "albums":
+                mCommunicator.loadAlbumsForSearch();
+                break;
+            case "artists":
+                mCommunicator.loadArtistsForSearch();
+                break;
+        }
     }
 
     public void showSongs(TrackList trackList){
@@ -58,6 +75,22 @@ public class SearchResultsFragment extends Fragment{
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
         adapter.swapData(trackList.items);
+    }
+
+    public void showAlbums(AlbumList albumList){
+        AlbumResultsAdapter adapter =
+                new AlbumResultsAdapter((SearchMvp.SearchView)getActivity(), getContext());
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(adapter);
+        adapter.swapData(albumList.items);
+    }
+
+    public void showArtists(ArtistList artistList){
+        ArtistsResultsAdapter adapter =
+                new ArtistsResultsAdapter((SearchMvp.SearchView)getActivity(), getContext());
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(adapter);
+        adapter.swapData(artistList.items);
     }
 
     interface SearchResultsFragmentCommunicator {

@@ -9,7 +9,6 @@ import com.priyankvex.skiffle.model.ArtistItem;
 import com.priyankvex.skiffle.model.SearchResults;
 import com.priyankvex.skiffle.model.SearchResultsListItem;
 import com.priyankvex.skiffle.model.TrackItem;
-import com.priyankvex.skiffle.model.TrackList;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -32,7 +31,7 @@ public class SearchPresenter implements SearchMvp.SearchPresenter{
     private SearchMvp.SearchView mView;
 
     private DisposableObserver<ArrayList<SearchResultsListItem>> mDisposableObserver;
-    private DisposableObserver<SearchResults> mTrackResultsObserver;
+    private DisposableObserver<SearchResults> mSearchResultsObserver;
 
     private DataSourceContract mDataSource;
 
@@ -82,7 +81,7 @@ public class SearchPresenter implements SearchMvp.SearchPresenter{
     @Override
     public void getSongResults(String query) {
 
-        mTrackResultsObserver = new DisposableObserver<SearchResults>() {
+        mSearchResultsObserver = new DisposableObserver<SearchResults>() {
             @Override
             public void onNext(SearchResults value) {
                 mView.showSongResults(value.tracks);
@@ -103,17 +102,61 @@ public class SearchPresenter implements SearchMvp.SearchPresenter{
         mSpotifyService.getSongResults(query, headers)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribeWith(mTrackResultsObserver);
+                .subscribeWith(mSearchResultsObserver);
     }
 
     @Override
     public void getAlbumResults(String query) {
 
+        mSearchResultsObserver = new DisposableObserver<SearchResults>() {
+            @Override
+            public void onNext(SearchResults value) {
+                mView.showAlbumSearchResults(value.albums);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.d("owlcity", e.getLocalizedMessage());
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        };
+
+        Map<String, String> headers = mDataSource.getAuthHeader();
+        mSpotifyService.getAlbumResults(query, headers)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribeWith(mSearchResultsObserver);
     }
 
     @Override
     public void getArtistResults(String query) {
 
+        mSearchResultsObserver = new DisposableObserver<SearchResults>() {
+            @Override
+            public void onNext(SearchResults value) {
+                mView.showArtistSearchResults(value.artists);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.d("owlcity", e.getLocalizedMessage());
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        };
+
+        Map<String, String> headers = mDataSource.getAuthHeader();
+        mSpotifyService.getArtistResults(query, headers)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribeWith(mSearchResultsObserver);
     }
 
     private ArrayList<SearchResultsListItem> getSearchResultItemsFromSearchResults

@@ -1,5 +1,7 @@
 package com.priyankvex.skiffle.ui.search;
 
+import com.priyankvex.skiffle.model.AlbumList;
+import com.priyankvex.skiffle.model.ArtistList;
 import com.priyankvex.skiffle.model.SearchResultsListItem;
 import com.priyankvex.skiffle.model.TrackList;
 
@@ -14,6 +16,8 @@ public interface SearchMvp {
     interface SearchView{
         void showSearchResults(ArrayList<SearchResultsListItem> results);
         void showSongResults(TrackList trackList);
+        void showAlbumSearchResults(AlbumList albumList);
+        void showArtistSearchResults(ArtistList artistList);
         void onSearchResultsPreviewItemClicked(SearchResultsListItem item, int position);
     }
 

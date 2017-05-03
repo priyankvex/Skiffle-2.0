@@ -132,24 +132,34 @@ public class SearchActivity extends AppCompatActivity implements SearchMvp.Searc
     }
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        String query = getIntent().getStringExtra(SearchManager.QUERY);
+        toolbar.setTitle(query);
+    }
+
+    @Override
     public SearchComponent getSearchComponent() {
         return mComponent;
     }
 
     @Override
     public void loadSongsForSearch() {
+        toolbar.setTitle(toolbar.getTitle() + " - Songs");
         String query = getIntent().getStringExtra(SearchManager.QUERY);
         mPresenter.getSongResults(query);
     }
 
     @Override
     public void loadAlbumsForSearch() {
+        toolbar.setTitle(toolbar.getTitle() + " - Albums");
         String query = getIntent().getStringExtra(SearchManager.QUERY);
         mPresenter.getAlbumResults(query);
     }
 
     @Override
     public void loadArtistsForSearch() {
+        toolbar.setTitle(toolbar.getTitle() + " - Artists");
         String query = getIntent().getStringExtra(SearchManager.QUERY);
         mPresenter.getArtistResults(query);
     }

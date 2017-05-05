@@ -5,6 +5,7 @@ import com.priyankvex.skiffle.model.ArtistDetails;
 import com.priyankvex.skiffle.model.ArtistTopTracks;
 import com.priyankvex.skiffle.model.NewReleases;
 import com.priyankvex.skiffle.model.SearchResults;
+import com.priyankvex.skiffle.model.TrackDetails;
 
 import java.util.Map;
 
@@ -28,6 +29,12 @@ public interface SpotifyService {
 
     @GET("albums/{id}")
     Observable<AlbumDetails> getAlbum(
+            @Path("id") String id,
+            @HeaderMap Map<String, String> headers
+    );
+
+    @GET("tracks/{id}?market=US")
+    Observable<TrackDetails> getTrack(
             @Path("id") String id,
             @HeaderMap Map<String, String> headers
     );

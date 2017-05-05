@@ -26,6 +26,7 @@ import com.priyankvex.skiffle.model.TrackList;
 import com.priyankvex.skiffle.module.SearchModule;
 import com.priyankvex.skiffle.ui.showalbumdetails.ShowAlbumDetailsActivity;
 import com.priyankvex.skiffle.ui.showartistdetails.ShowArtistDetailsActivity;
+import com.priyankvex.skiffle.ui.showtrackdetails.ShowTrackDetailsActivity;
 import com.priyankvex.skiffle.util.ActivityUtil;
 
 import java.util.ArrayList;
@@ -146,7 +147,10 @@ public class SearchActivity extends AppCompatActivity implements SearchMvp.Searc
 
     @Override
     public void onTrackItemClicked(TrackItem item, int position) {
-
+        Intent intent = new Intent(this, ShowTrackDetailsActivity.class);
+        intent.putExtra("track_id", item.id);
+        intent.putExtra("track_title", item.name);
+        startActivity(intent);
     }
 
     @Override

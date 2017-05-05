@@ -59,7 +59,7 @@ class SongResultsAdapter extends RecyclerView.Adapter<SongResultsAdapter.ViewHol
             @Override
             public void onClick(View view) {
                 int position = viewHolder.getAdapterPosition();
-                //mCommunicator.newReleaseItemClicked(position, newReleaseItems.get(position));
+                mCommunicator.onTrackItemClicked(mTracks.get(position), position);
             }
         });
         return viewHolder;

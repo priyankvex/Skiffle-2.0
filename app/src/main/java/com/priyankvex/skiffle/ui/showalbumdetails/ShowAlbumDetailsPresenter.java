@@ -149,6 +149,7 @@ class ShowAlbumDetailsPresenter implements ShowAlbumDetailsMvp.ShowAldumDetailsP
                 .subscribeWith(new DisposableObserver<Long>() {
                     @Override
                     public void onNext(Long value) {
+                        mView.reenableLikeButton();
                     }
 
                     @Override

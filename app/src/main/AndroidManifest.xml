@@ -28,6 +28,8 @@
 
         <activity android:name=".ui.showartistdetails.ShowArtistDetailsActivity" />
 
+        <activity android:name=".ui.showtrackdetails.ShowTrackDetailsActivity" />
+
         <activity android:name=".ui.search.SearchActivity"
             android:launchMode="singleTop">
             <intent-filter>

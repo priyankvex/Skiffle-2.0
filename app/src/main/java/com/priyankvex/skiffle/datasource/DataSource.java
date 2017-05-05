@@ -14,6 +14,9 @@ import com.priyankvex.skiffle.model.AlbumEntityDao;
 import com.priyankvex.skiffle.model.AlbumItem;
 import com.priyankvex.skiffle.model.AuthToken;
 import com.priyankvex.skiffle.model.DaoSession;
+import com.priyankvex.skiffle.model.TrackDetails;
+import com.priyankvex.skiffle.model.TrackEntity;
+import com.priyankvex.skiffle.model.TrackEntityDao;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -163,6 +166,42 @@ public class DataSource implements DataSourceContract{
     }
 
     @Override
+    public Observable<Long> saveTrackToFavorites(final TrackDetails track) {
+        return Observable.fromCallable(new Callable<Long>() {
+            @Override
+            public Long call() throws Exception {
+                long count = mDaoSession.getTrackEntityDao()
+                        .queryBuilder()
+                        .where(TrackEntityDao.Properties.TrackId.eq(track.id))
+                        .count();
+                if (count != 0){
+                    Log.d("owlcity", "Track with name " + track.name + " already present in favorites");
+                    return (long)-1;
+                }
+                TrackEntity entity = new TrackEntity();
+                entity.setTrackId(track.id);
+                entity.setTrackJsonData(mGson.toJson(track));
+                mDaoSession.getTrackEntityDao().insert(entity);
+                return entity.getId();
+            }
+        });
+    }
+
+    @Override
+    public Observable<Long> deleteTrackFromFavorites(final String trackId) {
+        return Observable.fromCallable(new Callable<Long>() {
+            @Override
+            public Long call() throws Exception {
+                mDaoSession.getTrackEntityDao().queryBuilder()
+                        .where(TrackEntityDao.Properties.TrackId.eq(trackId))
+                        .buildDelete()
+                        .executeDeleteWithoutDetachingEntities();
+                return (long)1;
+            }
+        });
+    }
+
+    @Override
     public Observable<ArrayList<AlbumItem>> loadFavoriteAlbums() {
         return Observable.fromCallable(new Callable<ArrayList<AlbumItem>>() {
             @Override
@@ -219,6 +258,50 @@ public class DataSource implements DataSourceContract{
                 }
                 else{
                     return mGson.fromJson(albums.get(0).getAlbumJsonData(), AlbumDetails.class);
+                }
+            }
+        });
+    }
+
+    @Override
+    public Observable<TrackDetails> loadTrackDetailsFromTrackId(final String trackId) {
+        return Observable.fromCallable(new Callable<TrackDetails>() {
+            @Override
+            public TrackDetails call() throws Exception {
+                List<TrackEntity> tracks = mDaoSession.getTrackEntityDao()
+                        .queryBuilder().where(TrackEntityDao.Properties.TrackId.eq(trackId))
+                        .limit(1)
+                        .build()
+                        .list();
+                if (tracks == null || tracks.size() == 0){
+                    // return a pseudo element representing that no element was found
+                    // this has been done because RxJava 2.xx doesn't allow null as stream element
+                    TrackDetails pseudoTrack = new TrackDetails();
+                    pseudoTrack.id = "track_not_found";
+                    return pseudoTrack;
+                }
+                else{
+                    return mGson.fromJson(tracks.get(0).getTrackJsonData(), TrackDetails.class);
+                }
+            }
+        });
+    }
+
+    @Override
+    public Observable<Boolean> isTrackSaved(final String trackId) {
+        return Observable.fromCallable(new Callable<Boolean>() {
+            @Override
+            public Boolean call() throws Exception {
+                List<TrackEntity> tracks = mDaoSession.getTrackEntityDao()
+                        .queryBuilder().where(TrackEntityDao.Properties.TrackId.eq(trackId))
+                        .limit(1)
+                        .build()
+                        .list();
+                if (tracks == null || tracks.size() == 0){
+                    return Boolean.FALSE;
+                }
+                else{
+                    return Boolean.TRUE;
                 }
             }
         });

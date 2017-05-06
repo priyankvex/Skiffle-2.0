@@ -44,6 +44,7 @@ public class FavoriteTracksFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_favorite_tracks, container, false);
         ButterKnife.bind(this, rootView);
+        mCommunicator.getComponent().inject(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(mAdapter);
         mCommunicator.loadFavoriteTracks();

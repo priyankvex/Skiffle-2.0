@@ -21,6 +21,7 @@ import com.priyankvex.skiffle.model.AlbumItem;
 import com.priyankvex.skiffle.model.TrackItem;
 import com.priyankvex.skiffle.module.FavoritesModule;
 import com.priyankvex.skiffle.ui.showalbumdetails.ShowAlbumDetailsActivity;
+import com.priyankvex.skiffle.ui.showtrackdetails.ShowTrackDetailsActivity;
 
 import java.util.ArrayList;
 
@@ -75,8 +76,8 @@ public class FavoritesFragment extends Fragment implements FavoritesMvp.Favorite
     }
 
     @Override
-    public void showFavoriteTracks() {
-
+    public void showFavoriteTracks(ArrayList<TrackItem> trackItems) {
+        mFavoriteTracksFragment.showTracks(trackItems);
     }
 
     @Override
@@ -85,8 +86,12 @@ public class FavoritesFragment extends Fragment implements FavoritesMvp.Favorite
     }
 
     @Override
+    public void showEmptyTracksUi() {
+
+    }
+
+    @Override
     public void onFavoriteAlbumItemClicked(int position, AlbumItem album) {
-        Log.d("owlcity", album.name + " clicked");
         Intent i = new Intent(getActivity(), ShowAlbumDetailsActivity.class);
         i.putExtra("album_id", album.id);
         i.putExtra("album_title", album.name);
@@ -96,7 +101,11 @@ public class FavoritesFragment extends Fragment implements FavoritesMvp.Favorite
 
     @Override
     public void onFavoriteTrackItemClicked(int position, TrackItem track) {
-
+        Intent i = new Intent(getActivity(), ShowTrackDetailsActivity.class);
+        i.putExtra("track_id", track.id);
+        i.putExtra("track_title", track.name);
+        i.putExtra("is_saved", true);
+        startActivity(i);
     }
 
     private void setUpTabLayout(){

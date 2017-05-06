@@ -177,6 +177,8 @@ public class SearchPresenter implements SearchMvp.SearchPresenter{
             if (track.album.images.size() >= 3){
                 songItem.thumbImageUrl = track.album.images.get(2).url;
             }
+            songItem.itemId = track.id;
+            songItem.itemTitle = track.name;
             list.add(songItem);
         }
         // second album header
@@ -194,6 +196,8 @@ public class SearchPresenter implements SearchMvp.SearchPresenter{
             if (album.images.size() >= 3){
                 albumItem.thumbImageUrl = album.images.get(2).url;
             }
+            albumItem.itemId = album.id;
+            albumItem.itemTitle = album.name;
             list.add(albumItem);
         }
         // third items header
@@ -211,6 +215,8 @@ public class SearchPresenter implements SearchMvp.SearchPresenter{
             if (artist.images.size() >= 3){
                 artistItem.thumbImageUrl = artist.images.get(2).url;
             }
+            artistItem.itemId = artist.id;
+            artistItem.itemTitle = artist.name;
             list.add(artistItem);
         }
         return list;

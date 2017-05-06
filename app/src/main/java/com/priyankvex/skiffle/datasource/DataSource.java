@@ -17,6 +17,7 @@ import com.priyankvex.skiffle.model.DaoSession;
 import com.priyankvex.skiffle.model.TrackDetails;
 import com.priyankvex.skiffle.model.TrackEntity;
 import com.priyankvex.skiffle.model.TrackEntityDao;
+import com.priyankvex.skiffle.model.TrackItem;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -221,6 +222,29 @@ public class DataSource implements DataSourceContract{
                     albums.add(item);
                 }
                 return albums;
+            }
+        });
+    }
+
+    @Override
+    public Observable<ArrayList<TrackItem>> loadFavoriteTracks() {
+        return Observable.fromCallable(new Callable<ArrayList<TrackItem>>() {
+            @Override
+            public ArrayList<TrackItem> call() throws Exception {
+                List<TrackEntity> trackEntities = mDaoSession.getTrackEntityDao().loadAll();
+                ArrayList<TrackItem> tracks= new ArrayList<>(5);
+                for (TrackEntity entity : trackEntities){
+                    TrackDetails track = mGson.fromJson(entity.getTrackJsonData(), TrackDetails.class);
+                    // drop the tracks to trim the size of the object
+                    TrackItem item = new TrackItem();
+                    item.name = track.name;
+                    item.id = track.id;
+                    item.type = track.type;
+                    item.artists = track.artists;
+                    item.album = track.album;
+                    tracks.add(item);
+                }
+                return tracks;
             }
         });
     }

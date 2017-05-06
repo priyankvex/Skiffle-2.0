@@ -59,7 +59,7 @@ class AlbumResultsAdapter extends RecyclerView.Adapter<AlbumResultsAdapter.ViewH
             @Override
             public void onClick(View view) {
                 int position = viewHolder.getAdapterPosition();
-                //mCommunicator.newReleaseItemClicked(position, newReleaseItems.get(position));
+                mCommunicator.onAlbumItemClicked(mAlbums.get(position),position);
             }
         });
         return viewHolder;

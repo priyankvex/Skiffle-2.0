@@ -1,5 +1,6 @@
 package com.priyankvex.skiffle.ui.showalbumdetails;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -20,7 +21,9 @@ import com.priyankvex.skiffle.SkiffleApp;
 import com.priyankvex.skiffle.component.DaggerShowAlbumDetailsComponent;
 import com.priyankvex.skiffle.component.ShowAlbumDetailsComponent;
 import com.priyankvex.skiffle.model.AlbumDetails;
+import com.priyankvex.skiffle.model.TrackItem;
 import com.priyankvex.skiffle.module.ShowAlbumDetailsModule;
+import com.priyankvex.skiffle.ui.showtrackdetails.ShowTrackDetailsActivity;
 
 import javax.inject.Inject;
 
@@ -117,6 +120,14 @@ public class ShowAlbumDetailsActivity extends AppCompatActivity implements ShowA
     @Override
     public void setLikedButtonStatus(boolean likedStatus) {
         buttonLike.setLiked(likedStatus);
+    }
+
+    @Override
+    public void onAlbumTrackClicked(TrackItem trackItem, int position) {
+        Intent intent = new Intent(this, ShowTrackDetailsActivity.class);
+        intent.putExtra("track_id", trackItem.id);
+        intent.putExtra("track_title", trackItem.name);
+        startActivity(intent);
     }
 
     @Override

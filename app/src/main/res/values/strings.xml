@@ -9,4 +9,5 @@
     <string name="search_hint">Search songs, albums and artists</string>
     <string name="search">Search</string>
     <string name="genres">Genres</string>
+    <string name="play_sample">Play Sample</string>
 </resources>

@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.priyankvex.skiffle.datasource.DataSourceContract;
 import com.priyankvex.skiffle.model.AlbumItem;
+import com.priyankvex.skiffle.model.TrackItem;
 
 import java.util.ArrayList;
 
@@ -25,6 +26,8 @@ class FavoritesPresenter implements FavoritesMvp.FavoritesPresenter{
 
     private DisposableObserver<ArrayList<AlbumItem>> mDisposableObserver;
 
+    private DisposableObserver<ArrayList<TrackItem>> mTracksDisposableObserver;
+
     @Inject
     FavoritesPresenter(DataSourceContract dataSource,
                        FavoritesMvp.FavoritesView view){
@@ -34,30 +37,58 @@ class FavoritesPresenter implements FavoritesMvp.FavoritesPresenter{
 
     @Override
     public void loadFavoriteTracks() {
-
-    }
-
-    @Override
-    public void loadFavoriteAlbums() {
-        Log.d("owlcity", "Loading albums from database");
-
-        Log.d("owlcity", "Loading tracks from database");
-
-        mDisposableObserver = new DisposableObserver<ArrayList<AlbumItem>>() {
+        mTracksDisposableObserver = new DisposableObserver<ArrayList<TrackItem>>() {
             @Override
-            public void onNext(ArrayList<AlbumItem> value) {
-                Log.d("owlcity", "No. of favorite albums : " + value.size());
-                mView.showFavoriteAlbums(value);
+            public void onNext(ArrayList<TrackItem> value) {
+                if (value.size() == 0){
+                    mView.showEmptyTracksUi();
+                }
+                else{
+                    mView.showFavoriteTracks(value);
+                }
             }
 
             @Override
             public void onError(Throwable e) {
-
+                Log.e("owlcity", e.getLocalizedMessage());
+                mView.showEmptyTracksUi();
             }
 
             @Override
             public void onComplete() {
+                Log.d("owlcity", "Loading favorite tracks completed");
+            }
+        };
 
+        mDataSource.loadFavoriteTracks()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(mTracksDisposableObserver);
+    }
+
+    @Override
+    public void loadFavoriteAlbums() {
+
+        mDisposableObserver = new DisposableObserver<ArrayList<AlbumItem>>() {
+            @Override
+            public void onNext(ArrayList<AlbumItem> value) {
+                if (value.size() == 0){
+                    mView.showEmptyAlbumsUi();
+                }
+                else{
+                    mView.showFavoriteAlbums(value);
+                }
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.e("owlcity", e.getLocalizedMessage());
+                mView.showEmptyAlbumsUi();
+            }
+
+            @Override
+            public void onComplete() {
+                Log.d("owlcity", "Loading favorite albums finished");
             }
         };
 

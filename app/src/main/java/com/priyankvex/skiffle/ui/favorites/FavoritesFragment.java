@@ -18,6 +18,7 @@ import com.priyankvex.skiffle.SkiffleApp;
 import com.priyankvex.skiffle.component.DaggerFavoritesComponent;
 import com.priyankvex.skiffle.component.FavoritesComponent;
 import com.priyankvex.skiffle.model.AlbumItem;
+import com.priyankvex.skiffle.model.TrackItem;
 import com.priyankvex.skiffle.module.FavoritesModule;
 import com.priyankvex.skiffle.ui.showalbumdetails.ShowAlbumDetailsActivity;
 
@@ -33,7 +34,8 @@ import butterknife.ButterKnife;
  */
 
 public class FavoritesFragment extends Fragment implements FavoritesMvp.FavoritesView,
-        FavoriteAlbumsFragment.FavoriteAlbumsCommunicator {
+        FavoriteAlbumsFragment.FavoriteAlbumsCommunicator,
+        FavoriteTracksFragment.FavoriteTracksCommunicator {
 
     @Inject
     FavoritesPresenter mPresenter;
@@ -64,8 +66,6 @@ public class FavoritesFragment extends Fragment implements FavoritesMvp.Favorite
                 .build();
         mComponent.inject(this);
 
-        mPresenter.loadFavoriteAlbums();
-
         return rootView;
     }
 
@@ -94,6 +94,11 @@ public class FavoritesFragment extends Fragment implements FavoritesMvp.Favorite
         startActivity(i);
     }
 
+    @Override
+    public void onFavoriteTrackItemClicked(int position, TrackItem track) {
+
+    }
+
     private void setUpTabLayout(){
         mTabLayout.addTab(mTabLayout.newTab().setText("Info"));
         mTabLayout.addTab(mTabLayout.newTab().setText("Tracks"));
@@ -105,8 +110,18 @@ public class FavoritesFragment extends Fragment implements FavoritesMvp.Favorite
     }
 
     @Override
+    public void loadFavoriteTracks() {
+        mPresenter.loadFavoriteTracks();
+    }
+
+    @Override
     public FavoritesComponent getComponent() {
         return mComponent;
+    }
+
+    @Override
+    public void loadFavoriteAlbums() {
+        mPresenter.loadFavoriteAlbums();
     }
 
     private class ViewPagerAdapter extends FragmentStatePagerAdapter {
@@ -128,6 +143,7 @@ public class FavoritesFragment extends Fragment implements FavoritesMvp.Favorite
                 case 0 :
                     if (mFavoriteTracksFragment == null){
                         mFavoriteTracksFragment = FavoriteTracksFragment.getInstance();
+                        mFavoriteTracksFragment.setCommunicator(FavoritesFragment.this);
                     }
                     return mFavoriteTracksFragment;
             }

@@ -59,5 +59,6 @@ public class FavoriteAlbumsFragment extends Fragment{
 
     interface FavoriteAlbumsCommunicator{
         FavoritesComponent getComponent();
+        void loadFavoriteAlbums();
     }
 }

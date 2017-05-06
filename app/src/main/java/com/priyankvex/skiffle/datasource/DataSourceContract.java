@@ -3,6 +3,7 @@ package com.priyankvex.skiffle.datasource;
 import com.priyankvex.skiffle.model.AlbumDetails;
 import com.priyankvex.skiffle.model.AlbumItem;
 import com.priyankvex.skiffle.model.TrackDetails;
+import com.priyankvex.skiffle.model.TrackItem;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -26,6 +27,8 @@ public interface DataSourceContract {
     Observable<Long> deleteTrackFromFavorites(String trackId);
 
     Observable<ArrayList<AlbumItem>> loadFavoriteAlbums();
+
+    Observable<ArrayList<TrackItem>> loadFavoriteTracks();
 
     Observable<AlbumDetails> loadAlbumFromAlbumId(String albumId);
 

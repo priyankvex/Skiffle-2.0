@@ -18,5 +18,7 @@ public class SearchResultsListItem {
     public String title;
     public String subTitle;
     public String thumbImageUrl;
+    public String itemId;
+    public String itemTitle;
     public ItemType itemType;
 }

@@ -50,7 +50,8 @@ class ArtistTracksAdapter extends RecyclerView.Adapter<ArtistTracksAdapter.ViewH
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                int position = viewHolder.getAdapterPosition();
+                mCommunicator.onArtistTrackClicked(mTracks.get(position), position);
             }
         });
         return viewHolder;

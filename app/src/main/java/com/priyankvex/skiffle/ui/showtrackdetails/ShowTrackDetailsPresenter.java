@@ -64,6 +64,7 @@ public class ShowTrackDetailsPresenter implements ShowTrackDetailsMvp.ShowTrackD
 
                     @Override
                     public void onError(Throwable e) {
+                        Log.d("owlcity", e.getLocalizedMessage());
                         mView.toggleLikeButton(false);
                     }
 

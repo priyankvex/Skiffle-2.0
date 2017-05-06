@@ -135,6 +135,29 @@ public class SearchActivity extends AppCompatActivity implements SearchMvp.Searc
             fragmentTransaction.addToBackStack("show_details");
             fragmentTransaction.commit();
         }
+        else if (item.viewType == SearchResultsListItem.ViewType.ITEM_VIEW){
+            Intent intent;
+            switch (item.itemType){
+                case TRACK:
+                    intent = new Intent(this, ShowTrackDetailsActivity.class);
+                    intent.putExtra("track_id", item.itemId);
+                    intent.putExtra("track_title", item.itemTitle);
+                    startActivity(intent);
+                    break;
+                case ALBUM:
+                    intent = new Intent(this, ShowAlbumDetailsActivity.class);
+                    intent.putExtra("album_id", item.itemId);
+                    intent.putExtra("album_title", item.itemTitle);
+                    startActivity(intent);
+                    break;
+                case ARTIST:
+                    intent = new Intent(this, ShowArtistDetailsActivity.class);
+                    intent.putExtra("artist_id", item.itemId);
+                    intent.putExtra("artist_title", item.itemTitle);
+                    startActivity(intent);
+                    break;
+            }
+        }
     }
 
     @Override
@@ -155,7 +178,10 @@ public class SearchActivity extends AppCompatActivity implements SearchMvp.Searc
 
     @Override
     public void onAlbumItemClicked(AlbumItem item, int position) {
-
+        Intent intent = new Intent(this, ShowAlbumDetailsActivity.class);
+        intent.putExtra("album_id", item.id);
+        intent.putExtra("album_title", item.name);
+        startActivity(intent);
     }
 
     @Override

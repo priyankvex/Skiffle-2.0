@@ -1,5 +1,6 @@
 package com.priyankvex.skiffle.ui.showartistdetails;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -20,6 +21,7 @@ import com.priyankvex.skiffle.model.TrackItem;
 import com.priyankvex.skiffle.model.TrackList;
 import com.priyankvex.skiffle.module.ShowArtistDetailsModule;
 import com.priyankvex.skiffle.ui.showalbumdetails.ShowAlbumDetailsActivity;
+import com.priyankvex.skiffle.ui.showtrackdetails.ShowTrackDetailsActivity;
 
 import java.util.ArrayList;
 
@@ -112,6 +114,14 @@ public class ShowArtistDetailsActivity extends AppCompatActivity implements Show
         if (mArtistTracksFragment != null){
             mArtistTracksFragment.showErrorUi();
         }
+    }
+
+    @Override
+    public void onArtistTrackClicked(TrackItem trackItem, int position) {
+        Intent intent = new Intent(this, ShowTrackDetailsActivity.class);
+        intent.putExtra("track_id", trackItem.id);
+        intent.putExtra("track_title", trackItem.name);
+        startActivity(intent);
     }
 
     @Override

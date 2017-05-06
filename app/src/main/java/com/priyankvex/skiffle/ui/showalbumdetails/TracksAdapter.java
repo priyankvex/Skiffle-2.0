@@ -49,7 +49,8 @@ class TracksAdapter extends RecyclerView.Adapter<TracksAdapter.ViewHolder>{
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                int position = viewHolder.getAdapterPosition();
+                mCommunicator.onAlbumTrackClicked(mTracks.get(position), position);
             }
         });
         return viewHolder;

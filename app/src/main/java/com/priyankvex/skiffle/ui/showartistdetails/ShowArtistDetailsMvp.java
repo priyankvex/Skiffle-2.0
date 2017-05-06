@@ -16,6 +16,7 @@ public interface ShowArtistDetailsMvp {
         void showArtistDetailsErrorUi();
         void showArtistTopTracks(ArrayList<TrackItem> trackList);
         void showArtistTopTrackErrorUi();
+        void onArtistTrackClicked(TrackItem trackItem, int position);
     }
 
     interface ShowArtistDetailsPresenter{

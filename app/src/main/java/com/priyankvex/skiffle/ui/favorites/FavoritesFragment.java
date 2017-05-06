@@ -82,12 +82,12 @@ public class FavoritesFragment extends Fragment implements FavoritesMvp.Favorite
 
     @Override
     public void showEmptyAlbumsUi() {
-
+        mFavoriteAlbumsFragment.showEmptyUi();
     }
 
     @Override
     public void showEmptyTracksUi() {
-
+        mFavoriteTracksFragment.showEmptyUi();
     }
 
     @Override

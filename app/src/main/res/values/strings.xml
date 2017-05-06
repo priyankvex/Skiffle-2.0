@@ -10,4 +10,6 @@
     <string name="search">Search</string>
     <string name="genres">Genres</string>
     <string name="play_sample">Play Sample</string>
+    <string name="error_title">Snap! Something went wrong</string>
+    <string name="error_subtitle">Have a burger to make your day better</string>
 </resources>

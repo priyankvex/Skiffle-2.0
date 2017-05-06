@@ -53,6 +53,10 @@ public class FavoriteAlbumsFragment extends Fragment{
         this.mCommunicator = communicator;
     }
 
+    void showEmptyUi(){
+
+    }
+
     void showFavoriteAlbums(ArrayList<AlbumItem> albums){
         mAdapter.swapData(albums);
     }

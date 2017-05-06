@@ -37,7 +37,6 @@ public class NewReleasesPresenter implements NewReleasesMvp.NewReleasesPresenter
         this.mSpotifyService = spotifyService;
         this.mView = view;
         this.mDataSource = dataSource;
-        mView.showErrorUi("");
     }
 
     /**

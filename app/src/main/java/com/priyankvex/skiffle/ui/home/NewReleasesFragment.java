@@ -10,6 +10,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
 import com.priyankvex.skiffle.R;
 import com.priyankvex.skiffle.SkiffleApp;
@@ -40,6 +42,12 @@ public class NewReleasesFragment extends Fragment implements NewReleasesMvp.NewR
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
 
+    @BindView(R.id.progress_bar)
+    ProgressBar progressBar;
+
+    @BindView(R.id.error_layout)
+    RelativeLayout errorLayout;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -62,11 +70,16 @@ public class NewReleasesFragment extends Fragment implements NewReleasesMvp.NewR
 
     @Override
     public void showErrorUi(String errorMessage) {
-        Log.d("owlcity", "New releases show error ui called");
+        progressBar.setVisibility(View.INVISIBLE);
+        recyclerView.setVisibility(View.INVISIBLE);
+        errorLayout.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void showNewReleases(NewReleases newRelease) {
+        progressBar.setVisibility(View.INVISIBLE);
+        recyclerView.setVisibility(View.VISIBLE);
+        errorLayout.setVisibility(View.INVISIBLE);
         mAdapter.swapData(newRelease.albums.items);
     }
 

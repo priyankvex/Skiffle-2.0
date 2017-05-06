@@ -55,6 +55,10 @@ public class FavoriteTracksFragment extends Fragment {
         mAdapter.swapData(tracks);
     }
 
+    void showEmptyUi(){
+
+    }
+
     void setCommunicator(FavoriteTracksCommunicator communicator){
         this.mCommunicator = communicator;
     }

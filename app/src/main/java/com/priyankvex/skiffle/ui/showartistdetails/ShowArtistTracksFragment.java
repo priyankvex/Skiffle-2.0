@@ -75,7 +75,7 @@ public class ShowArtistTracksFragment extends Fragment{
     }
 
     public void showErrorUi(){
-        progressBar.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.INVISIBLE);
         errorLayout.setVisibility(View.VISIBLE);
     }
 

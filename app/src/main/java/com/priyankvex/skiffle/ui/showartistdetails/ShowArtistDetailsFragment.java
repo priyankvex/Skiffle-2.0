@@ -91,6 +91,7 @@ public class ShowArtistDetailsFragment extends Fragment{
     public void showErrorUi(){
         progressBar.setVisibility(View.INVISIBLE);
         errorLayout.setVisibility(View.VISIBLE);
+        
     }
 
     interface ShowArtistDetailsFragmentCommunicator{

@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import com.priyankvex.skiffle.R;
 import com.priyankvex.skiffle.component.FavoritesComponent;
@@ -37,6 +38,9 @@ public class FavoriteTracksFragment extends Fragment {
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
 
+    @BindView(R.id.empty_layout)
+    RelativeLayout emptyLayout;
+
     FavoriteTracksCommunicator mCommunicator;
 
     @Nullable
@@ -47,8 +51,13 @@ public class FavoriteTracksFragment extends Fragment {
         mCommunicator.getComponent().inject(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(mAdapter);
-        mCommunicator.loadFavoriteTracks();
         return rootView;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mCommunicator.loadFavoriteTracks();
     }
 
     void showTracks(ArrayList<TrackItem> tracks){
@@ -56,7 +65,8 @@ public class FavoriteTracksFragment extends Fragment {
     }
 
     void showEmptyUi(){
-
+        recyclerView.setVisibility(View.INVISIBLE);
+        emptyLayout.setVisibility(View.VISIBLE);
     }
 
     void setCommunicator(FavoriteTracksCommunicator communicator){

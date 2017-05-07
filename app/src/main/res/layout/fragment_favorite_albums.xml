@@ -8,4 +8,28 @@
         android:layout_height="match_parent"
         android:id="@+id/recycler_view"/>
 
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/empty_layout"
+        android:layout_centerInParent="true"
+        android:visibility="invisible">
+
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:scaleType="center"
+            android:src="@drawable/sadbox"
+            android:id="@+id/image_view_sadbox"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/wow_such_empty"
+            android:layout_below="@+id/image_view_sadbox"
+            android:layout_marginTop="25dp"
+            android:layout_centerHorizontal="true"/>
+
+    </RelativeLayout>
+
 </RelativeLayout>

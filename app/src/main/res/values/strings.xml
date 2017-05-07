@@ -12,4 +12,5 @@
     <string name="play_sample">Play Sample</string>
     <string name="error_title">Snap! Something went wrong</string>
     <string name="error_subtitle">Have a burger to make your day better</string>
+    <string name="wow_such_empty">Wow! Such empty!</string>
 </resources>

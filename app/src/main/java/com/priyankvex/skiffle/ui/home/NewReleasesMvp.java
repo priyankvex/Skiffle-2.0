@@ -17,6 +17,7 @@ public interface NewReleasesMvp {
 
     interface NewReleasesPresenter{
         void getNewReleases();
+        void onStop();
     }
 
 }

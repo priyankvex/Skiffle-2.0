@@ -179,4 +179,9 @@ public class ShowTrackDetailsPresenter implements ShowTrackDetailsMvp.ShowTrackD
                     }
                 });
     }
+
+    @Override
+    public void onStop() {
+        mDisposableObserver.dispose();
+    }
 }

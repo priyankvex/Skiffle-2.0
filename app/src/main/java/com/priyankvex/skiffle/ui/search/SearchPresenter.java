@@ -226,4 +226,9 @@ public class SearchPresenter implements SearchMvp.SearchPresenter{
         return list;
     }
 
+    @Override
+    public void onStop() {
+        mDisposableObserver.dispose();
+        mSearchResultsObserver.dispose();
+    }
 }

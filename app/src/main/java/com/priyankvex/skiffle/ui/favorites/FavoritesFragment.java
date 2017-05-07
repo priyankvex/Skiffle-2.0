@@ -71,6 +71,12 @@ public class FavoritesFragment extends Fragment implements FavoritesMvp.Favorite
     }
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mPresenter.onStop();
+    }
+
+    @Override
     public void showFavoriteAlbums(ArrayList<AlbumItem> albums) {
         mFavoriteAlbumsFragment.showFavoriteAlbums(albums);
     }

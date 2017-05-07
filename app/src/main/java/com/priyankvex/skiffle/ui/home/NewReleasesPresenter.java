@@ -90,9 +90,8 @@ public class NewReleasesPresenter implements NewReleasesMvp.NewReleasesPresenter
                 .subscribeWith(mDisposableObserver);
     }
 
-    void cancelSubscriptions(){
+    @Override
+    public void onStop() {
         mDisposableObserver.dispose();
     }
-
-
 }

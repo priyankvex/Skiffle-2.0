@@ -33,5 +33,6 @@ public interface SearchMvp {
         void getSongResults(String query);
         void getAlbumResults(String query);
         void getArtistResults(String query);
+        void onStop();
     }
 }

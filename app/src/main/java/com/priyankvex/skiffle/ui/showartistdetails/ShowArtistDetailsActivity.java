@@ -70,6 +70,12 @@ public class ShowArtistDetailsActivity extends AppCompatActivity implements Show
         mComponent.inject(this);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mPresenter.onStop();
+    }
+
     private void setUpToolbar(){
         String title = getIntent().getStringExtra("artist_title");
         mToolbar.setTitle(title);

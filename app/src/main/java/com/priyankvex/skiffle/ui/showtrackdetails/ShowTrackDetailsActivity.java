@@ -94,6 +94,12 @@ public class ShowTrackDetailsActivity extends AppCompatActivity implements ShowT
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mPresenter.onStop();
+    }
+
+    @Override
     public void showTrackDetails(TrackDetails trackDetails) {
         progressBar.setVisibility(View.GONE);
         textViewTrackName.setVisibility(View.VISIBLE);

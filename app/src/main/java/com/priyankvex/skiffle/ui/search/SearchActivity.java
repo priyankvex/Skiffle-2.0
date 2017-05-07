@@ -102,6 +102,12 @@ public class SearchActivity extends AppCompatActivity implements SearchMvp.Searc
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mPresenter.onStop();
+    }
+
+    @Override
     public void showSearchResults(ArrayList<SearchResultsListItem> results) {
         progressBar.setVisibility(View.INVISIBLE);
         mResultsPreviewFragment.showSearchResults(results);

@@ -22,5 +22,6 @@ public interface ShowArtistDetailsMvp {
     interface ShowArtistDetailsPresenter{
         void getArtistDetails(String artistId);
         void getArtistTopTracks(String artistId);
+        void onStop();
     }
 }

@@ -20,5 +20,6 @@ public interface ShowTrackDetailsMvp {
         void setSavedStatus(boolean status);
         void saveTrackToFavorites();
         void deleteTrackFromFavorites();
+        void onStop();
     }
 }

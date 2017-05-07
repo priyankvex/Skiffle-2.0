@@ -23,5 +23,6 @@ public interface FavoritesMvp {
     interface FavoritesPresenter{
         void loadFavoriteTracks();
         void loadFavoriteAlbums();
+        void onStop();
     }
 }

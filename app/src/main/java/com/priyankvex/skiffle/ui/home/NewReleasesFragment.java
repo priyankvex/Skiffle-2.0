@@ -69,6 +69,12 @@ public class NewReleasesFragment extends Fragment implements NewReleasesMvp.NewR
     }
 
     @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mPresenter.onStop();
+    }
+
+    @Override
     public void showErrorUi(String errorMessage) {
         progressBar.setVisibility(View.INVISIBLE);
         recyclerView.setVisibility(View.INVISIBLE);

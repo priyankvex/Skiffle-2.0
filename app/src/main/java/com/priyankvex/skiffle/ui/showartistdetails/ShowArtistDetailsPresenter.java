@@ -98,4 +98,10 @@ public class ShowArtistDetailsPresenter implements ShowArtistDetailsMvp.ShowArti
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(mDisposableArtistTopTracks);
     }
+
+    @Override
+    public void onStop() {
+        mDisposableArtistDetails.dispose();
+        mDisposableArtistTopTracks.dispose();
+    }
 }

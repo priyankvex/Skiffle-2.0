@@ -98,5 +98,9 @@ class FavoritesPresenter implements FavoritesMvp.FavoritesPresenter{
                 .subscribeWith(mDisposableObserver);
     }
 
-
+    @Override
+    public void onStop() {
+        mDisposableObserver.dispose();
+        mTracksDisposableObserver.dispose();
+    }
 }

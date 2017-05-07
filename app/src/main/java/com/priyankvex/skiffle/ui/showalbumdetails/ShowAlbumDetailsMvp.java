@@ -23,5 +23,6 @@ public interface ShowAlbumDetailsMvp {
         void setSavedAlbum(boolean status);
         void deleteAlbumFromFavorites();
         AlbumDetails getAlbumDetails();
+        void onStop();
     }
 }

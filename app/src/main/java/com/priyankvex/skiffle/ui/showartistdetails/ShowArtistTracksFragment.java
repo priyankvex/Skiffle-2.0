@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
 import com.priyankvex.skiffle.R;
 import com.priyankvex.skiffle.component.ShowArtistDetailsComponent;
@@ -39,6 +40,9 @@ public class ShowArtistTracksFragment extends Fragment{
 
     @BindView(R.id.progress_bar)
     ProgressBar progressBar;
+
+    @BindView(R.id.error_layout)
+    RelativeLayout errorLayout;
 
     public static ShowArtistTracksFragment getInstance(){
         return new ShowArtistTracksFragment();
@@ -71,7 +75,8 @@ public class ShowArtistTracksFragment extends Fragment{
     }
 
     public void showErrorUi(){
-
+        progressBar.setVisibility(View.VISIBLE);
+        errorLayout.setVisibility(View.VISIBLE);
     }
 
     interface ShowArtistsTracksCommunicator{

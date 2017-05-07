@@ -56,6 +56,7 @@ public class SearchPresenter implements SearchMvp.SearchPresenter{
             @Override
             public void onError(Throwable e) {
                 Log.d("owlcity", e.getLocalizedMessage());
+                mView.showErrorUi();
             }
 
             @Override
@@ -90,6 +91,7 @@ public class SearchPresenter implements SearchMvp.SearchPresenter{
             @Override
             public void onError(Throwable e) {
                 Log.d("owlcity", e.getLocalizedMessage());
+                mView.showErrorUi();
             }
 
             @Override
@@ -117,6 +119,7 @@ public class SearchPresenter implements SearchMvp.SearchPresenter{
             @Override
             public void onError(Throwable e) {
                 Log.d("owlcity", e.getLocalizedMessage());
+                mView.showErrorUi();
             }
 
             @Override
@@ -144,6 +147,7 @@ public class SearchPresenter implements SearchMvp.SearchPresenter{
             @Override
             public void onError(Throwable e) {
                 Log.d("owlcity", e.getLocalizedMessage());
+                mView.showErrorUi();
             }
 
             @Override

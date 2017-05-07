@@ -25,6 +25,7 @@ public interface SearchMvp {
         void onArtistItemClicked(ArtistItem item, int position);
         void onTrackItemClicked(TrackItem item, int position);
         void onAlbumItemClicked(AlbumItem item, int position);
+        void showErrorUi();
     }
 
     interface SearchPresenter{

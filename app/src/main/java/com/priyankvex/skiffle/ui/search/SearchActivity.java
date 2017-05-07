@@ -10,6 +10,10 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
 import com.priyankvex.skiffle.R;
 import com.priyankvex.skiffle.SkiffleApp;
@@ -49,6 +53,15 @@ public class SearchActivity extends AppCompatActivity implements SearchMvp.Searc
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+
+    @BindView(R.id.container)
+    FrameLayout containerFrame;
+
+    @BindView(R.id.error_layout)
+    RelativeLayout errorLayout;
+
+    @BindView(R.id.progress_bar)
+    ProgressBar progressBar;
 
     private ResultsPreviewFragment mResultsPreviewFragment;
 
@@ -90,21 +103,25 @@ public class SearchActivity extends AppCompatActivity implements SearchMvp.Searc
 
     @Override
     public void showSearchResults(ArrayList<SearchResultsListItem> results) {
+        progressBar.setVisibility(View.INVISIBLE);
         mResultsPreviewFragment.showSearchResults(results);
     }
 
     @Override
     public void showSongResults(TrackList trackList) {
+        progressBar.setVisibility(View.INVISIBLE);
         mSearchResultsFragment.showSongs(trackList);
     }
 
     @Override
     public void showAlbumSearchResults(AlbumList albumList) {
+        progressBar.setVisibility(View.INVISIBLE);
         mSearchResultsFragment.showAlbums(albumList);
     }
 
     @Override
     public void showArtistSearchResults(ArtistList artistList) {
+        progressBar.setVisibility(View.INVISIBLE);
         mSearchResultsFragment.showArtists(artistList);
     }
 
@@ -198,6 +215,7 @@ public class SearchActivity extends AppCompatActivity implements SearchMvp.Searc
 
     @Override
     public void loadSongsForSearch() {
+        progressBar.setVisibility(View.VISIBLE);
         toolbar.setTitle(toolbar.getTitle() + " - Songs");
         String query = getIntent().getStringExtra(SearchManager.QUERY);
         mPresenter.getSongResults(query);
@@ -205,6 +223,7 @@ public class SearchActivity extends AppCompatActivity implements SearchMvp.Searc
 
     @Override
     public void loadAlbumsForSearch() {
+        progressBar.setVisibility(View.VISIBLE);
         toolbar.setTitle(toolbar.getTitle() + " - Albums");
         String query = getIntent().getStringExtra(SearchManager.QUERY);
         mPresenter.getAlbumResults(query);
@@ -212,9 +231,17 @@ public class SearchActivity extends AppCompatActivity implements SearchMvp.Searc
 
     @Override
     public void loadArtistsForSearch() {
+        progressBar.setVisibility(View.VISIBLE);
         toolbar.setTitle(toolbar.getTitle() + " - Artists");
         String query = getIntent().getStringExtra(SearchManager.QUERY);
         mPresenter.getArtistResults(query);
+    }
+
+    @Override
+    public void showErrorUi() {
+        containerFrame.setVisibility(View.INVISIBLE);
+        errorLayout.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.INVISIBLE);
     }
 
     private void setUpToolbar(String title){

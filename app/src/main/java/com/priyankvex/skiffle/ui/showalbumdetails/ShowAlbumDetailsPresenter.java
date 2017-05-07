@@ -173,4 +173,12 @@ class ShowAlbumDetailsPresenter implements ShowAlbumDetailsMvp.ShowAldumDetailsP
     public AlbumDetails getAlbumDetails() {
         return mAlbum;
     }
+
+    /**
+     * Cancel the subscriptions
+     */
+    @Override
+    public void onStop() {
+        mDisposableObserver.dispose();
+    }
 }

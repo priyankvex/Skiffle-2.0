@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.like.LikeButton;
@@ -60,6 +61,9 @@ public class ShowTrackDetailsActivity extends AppCompatActivity implements ShowT
 
     @BindView(R.id.button_play_sample)
     Button buttonPlaySample;
+
+    @BindView(R.id.error_layout)
+    RelativeLayout errorLayout;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -116,7 +120,8 @@ public class ShowTrackDetailsActivity extends AppCompatActivity implements ShowT
 
     @Override
     public void showErrorUi() {
-
+        progressBar.setVisibility(View.GONE);
+        errorLayout.setVisibility(View.VISIBLE);
     }
 
     @Override

@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
 import com.like.LikeButton;
 import com.like.OnLikeListener;
@@ -51,6 +52,9 @@ public class ShowAlbumDetailsActivity extends AppCompatActivity implements ShowA
 
     @BindView(R.id.progress_bar)
     ProgressBar progressBar;
+
+    @BindView(R.id.error_layout)
+    RelativeLayout errorLayout;
 
     @Inject
     ShowAlbumDetailsPresenter mPresenter;
@@ -94,6 +98,12 @@ public class ShowAlbumDetailsActivity extends AppCompatActivity implements ShowA
         });
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mPresenter.onStop();
+    }
+
     private void setUpToolbar(){
         String title = getIntent().getStringExtra("album_title");
         mToolbar.setTitle(title);
@@ -135,6 +145,7 @@ public class ShowAlbumDetailsActivity extends AppCompatActivity implements ShowA
         progressBar.setVisibility(View.GONE);
         mViewPager.setVisibility(View.GONE);
         buttonLike.setVisibility(View.GONE);
+        errorLayout.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -142,6 +153,7 @@ public class ShowAlbumDetailsActivity extends AppCompatActivity implements ShowA
         mViewPager.setVisibility(View.VISIBLE);
         buttonLike.setVisibility(View.VISIBLE);
         progressBar.setVisibility(View.GONE);
+        errorLayout.setVisibility(View.GONE);
         setUpViewPager();
     }
 

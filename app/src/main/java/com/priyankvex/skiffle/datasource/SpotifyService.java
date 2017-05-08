@@ -74,4 +74,10 @@ public interface SpotifyService {
             @Query("q") String query,
             @HeaderMap Map<String, String> headers
     );
+
+    @GET("recommendations?market=US&seed_tracks={tracks_seeds}&seed_artists={artist_seeds}")
+    Observable<SearchResults> getRecommendations(
+        @Path("track_seeds") String trackSeeds,
+        @Path("artist_seeds") String artistSeeds
+    );
 }

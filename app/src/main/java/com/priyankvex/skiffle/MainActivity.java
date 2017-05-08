@@ -17,6 +17,7 @@ import android.view.MenuItem;
 
 import com.priyankvex.skiffle.ui.favorites.FavoritesFragment;
 import com.priyankvex.skiffle.ui.home.NewReleasesFragment;
+import com.priyankvex.skiffle.ui.recommendations.RecommendationsFragment;
 import com.priyankvex.skiffle.util.ActivityUtil;
 
 import butterknife.BindView;
@@ -73,6 +74,11 @@ public class MainActivity extends AppCompatActivity implements
             case R.id.item_favorites:
                 ActivityUtil.replaceFragmentInContainer(getSupportFragmentManager(),
                         new FavoritesFragment(), R.id.container, "nav_frag");
+                break;
+
+            case R.id.item_recommendations:
+                ActivityUtil.replaceFragmentInContainer(getSupportFragmentManager(),
+                        RecommendationsFragment.getInstance(), R.id.container, "nav_frag");
                 break;
         }
         item.setChecked(true);

@@ -1,6 +1,9 @@
 package com.priyankvex.skiffle.ui.recommendations;
 
+import com.priyankvex.skiffle.model.TrackItem;
 import com.priyankvex.skiffle.model.TrackList;
+
+import java.util.ArrayList;
 
 /**
  * Created by priyankvex on 8/5/17.
@@ -9,7 +12,7 @@ import com.priyankvex.skiffle.model.TrackList;
 public interface RecommendationsMvp {
 
     interface View{
-        void showRecommendations(TrackList recommendedTracks);
+        void showRecommendations(ArrayList<TrackItem> recommendedTracks);
         void showNoRecommendationsUi();
         void showErrorUi();
     }

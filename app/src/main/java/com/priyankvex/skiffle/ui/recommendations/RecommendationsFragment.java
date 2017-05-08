@@ -3,6 +3,7 @@ package com.priyankvex.skiffle.ui.recommendations;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,8 +15,11 @@ import com.priyankvex.skiffle.R;
 import com.priyankvex.skiffle.SkiffleApp;
 import com.priyankvex.skiffle.component.DaggerRecommendationsComponent;
 import com.priyankvex.skiffle.component.RecommendationsComponent;
+import com.priyankvex.skiffle.model.TrackItem;
 import com.priyankvex.skiffle.model.TrackList;
 import com.priyankvex.skiffle.module.RecommendationsModule;
+
+import java.util.ArrayList;
 
 import javax.inject.Inject;
 
@@ -43,6 +47,9 @@ public class RecommendationsFragment extends Fragment implements Recommendations
     @Inject
     RecommendationsPresenter mPresenter;
 
+    @Inject
+    RecommendationsAdapter mAdapter;
+
     public static RecommendationsFragment getInstance(){
         return new RecommendationsFragment();
     }
@@ -61,14 +68,17 @@ public class RecommendationsFragment extends Fragment implements Recommendations
         component.inject(this);
 
         mPresenter.loadRecommendations();
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(mAdapter);
 
         return rootView;
     }
 
     @Override
-    public void showRecommendations(TrackList recommendedTracks) {
+    public void showRecommendations(ArrayList<TrackItem> recommendedTracks) {
         progressBar.setVisibility(View.INVISIBLE);
         recyclerView.setVisibility(View.VISIBLE);
+        mAdapter.swapData(recommendedTracks );
     }
 
     @Override

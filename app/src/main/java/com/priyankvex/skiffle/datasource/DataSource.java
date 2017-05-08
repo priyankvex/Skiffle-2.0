@@ -19,6 +19,7 @@ import com.priyankvex.skiffle.model.TrackEntity;
 import com.priyankvex.skiffle.model.TrackEntityDao;
 import com.priyankvex.skiffle.model.TrackItem;
 
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -327,6 +328,38 @@ public class DataSource implements DataSourceContract{
                 else{
                     return Boolean.TRUE;
                 }
+            }
+        });
+    }
+
+    @Override
+    public Observable<Map<String, String>> getRecommendationsSeeds() {
+        return Observable.fromCallable(new Callable<Map<String, String>>() {
+            @Override
+            public Map<String, String> call() throws Exception {
+                // read the favorite songs
+                StringBuilder trackSeeds = new StringBuilder();
+                List<TrackEntity> tracks = mDaoSession.getTrackEntityDao()
+                        .loadAll();
+                for (TrackEntity trackEntity : tracks){
+                    trackSeeds.append(trackEntity.getTrackId());
+                    trackSeeds.append(",");
+                }
+
+                StringBuilder artistSeeds = new StringBuilder();
+                List<AlbumEntity> albums = mDaoSession.getAlbumEntityDao()
+                        .loadAll();
+                AlbumDetails tempAlbumDetails;
+                for (AlbumEntity entity : albums){
+                    tempAlbumDetails = mGson.fromJson(entity.getAlbumJsonData(), AlbumDetails.class);
+                    artistSeeds.append(tempAlbumDetails.artists.get(0).id);
+                    artistSeeds.append(",");
+                }
+
+                Map<String, String> map = new HashMap<>();
+                map.put("track_seeds", trackSeeds.toString());
+                map.put("artist_seeds", artistSeeds.toString());
+                return map;
             }
         });
     }

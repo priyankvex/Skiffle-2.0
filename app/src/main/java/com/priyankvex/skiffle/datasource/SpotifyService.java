@@ -14,6 +14,7 @@ import retrofit2.http.GET;
 import retrofit2.http.HeaderMap;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import retrofit2.http.QueryMap;
 
 
 /**
@@ -75,9 +76,9 @@ public interface SpotifyService {
             @HeaderMap Map<String, String> headers
     );
 
-    @GET("recommendations?market=US&seed_tracks={tracks_seeds}&seed_artists={artist_seeds}")
-    Observable<SearchResults> getRecommendations(
-        @Path("track_seeds") String trackSeeds,
-        @Path("artist_seeds") String artistSeeds
+    @GET("recommendations?market=US&limit=40")
+    Observable<ArtistTopTracks> getRecommendations(
+        @QueryMap Map<String, String> map,
+        @HeaderMap Map<String, String> headers
     );
 }

@@ -38,6 +38,8 @@ public interface DataSourceContract {
 
     Observable<Long> deleteAlbumFromFavorites(String albumId);
 
+    Observable<Map<String, String>> getRecommendationsSeeds();
+
     interface AuthRenewCallback {
         void onAuthRenewed();
         void onAuthFailed();

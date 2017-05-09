@@ -28,6 +28,10 @@ public class ShowTrackDetailsPresenter implements ShowTrackDetailsMvp.ShowTrackD
 
     private DisposableObserver<TrackDetails> mDisposableObserver;
 
+    public TrackDetails getTrackDetails() {
+        return mTrackDetails;
+    }
+
     private TrackDetails mTrackDetails;
 
     @Inject

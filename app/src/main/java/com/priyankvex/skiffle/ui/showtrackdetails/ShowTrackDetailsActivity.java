@@ -1,10 +1,12 @@
 package com.priyankvex.skiffle.ui.showtrackdetails;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -89,6 +91,14 @@ public class ShowTrackDetailsActivity extends AppCompatActivity implements ShowT
             public void unLiked(LikeButton likeButton) {
                 buttonLike.setEnabled(false);
                 mPresenter.deleteTrackFromFavorites();
+            }
+        });
+        buttonPlaySample.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ShowTrackDetailsActivity.this, WebViewActivity.class);
+                i.putExtra("url", mPresenter.getTrackDetails().previewUrl);
+                startActivity(i);
             }
         });
     }

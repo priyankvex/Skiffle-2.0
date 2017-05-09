@@ -30,6 +30,8 @@
 
         <activity android:name=".ui.showtrackdetails.ShowTrackDetailsActivity" />
 
+        <activity android:name=".ui.showtrackdetails.WebViewActivity" />
+
         <activity android:name=".ui.search.SearchActivity"
             android:launchMode="singleTop">
             <intent-filter>

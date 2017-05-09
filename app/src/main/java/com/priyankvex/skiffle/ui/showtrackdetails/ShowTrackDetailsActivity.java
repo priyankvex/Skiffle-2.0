@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
@@ -107,6 +108,14 @@ public class ShowTrackDetailsActivity extends AppCompatActivity implements ShowT
     protected void onDestroy() {
         super.onDestroy();
         mPresenter.onStop();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home){
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

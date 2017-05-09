@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
@@ -212,6 +213,14 @@ public class SearchActivity extends AppCompatActivity implements SearchMvp.Searc
         super.onBackPressed();
         String query = getIntent().getStringExtra(SearchManager.QUERY);
         toolbar.setTitle(query);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home){
+            onBackPressed();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

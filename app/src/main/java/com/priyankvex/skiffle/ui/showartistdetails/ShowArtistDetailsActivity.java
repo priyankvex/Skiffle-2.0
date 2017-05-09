@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.widget.ProgressBar;
 
 import com.priyankvex.skiffle.R;
@@ -74,6 +75,14 @@ public class ShowArtistDetailsActivity extends AppCompatActivity implements Show
     protected void onDestroy() {
         super.onDestroy();
         mPresenter.onStop();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home){
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void setUpToolbar(){

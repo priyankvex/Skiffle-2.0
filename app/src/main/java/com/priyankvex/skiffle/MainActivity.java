@@ -11,6 +11,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -98,5 +99,17 @@ public class MainActivity extends AppCompatActivity implements
         //searchView.setQueryHint(getResources().getString(R.string.search_hint));
         return true;
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // THIS IS YOUR DRAWER/HAMBURGER BUTTON
+            case android.R.id.home:
+                mDrawerLayout.openDrawer(GravityCompat.START);
+                return true;
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

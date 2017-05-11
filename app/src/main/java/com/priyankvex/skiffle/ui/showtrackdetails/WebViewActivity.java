@@ -1,11 +1,10 @@
 package com.priyankvex.skiffle.ui.showtrackdetails;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.webkit.WebView;
+import android.widget.Toast;
 
 import com.priyankvex.skiffle.R;
 
@@ -27,8 +26,19 @@ public class WebViewActivity extends AppCompatActivity{
         setContentView(R.layout.activity_web);
         ButterKnife.bind(this);
         String url = getIntent().getStringExtra("url");
-        Log.d("owlcity", url);
-        webView.getSettings().setJavaScriptEnabled(true);
-        webView.loadUrl(url);
+        if (url != null && !url.equals("")){
+            webView.getSettings().setJavaScriptEnabled(true);
+            webView.loadUrl(url);
+        }
+        else{
+            Toast.makeText(this, "Preview Not Available", Toast.LENGTH_SHORT).show();
+            finish();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        webView.loadUrl("about:blank");
     }
 }

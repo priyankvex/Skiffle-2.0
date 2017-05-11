@@ -1,5 +1,6 @@
 package com.priyankvex.skiffle.ui.recommendations;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -18,6 +19,7 @@ import com.priyankvex.skiffle.component.RecommendationsComponent;
 import com.priyankvex.skiffle.model.TrackItem;
 import com.priyankvex.skiffle.model.TrackList;
 import com.priyankvex.skiffle.module.RecommendationsModule;
+import com.priyankvex.skiffle.ui.showtrackdetails.ShowTrackDetailsActivity;
 
 import java.util.ArrayList;
 
@@ -91,5 +93,13 @@ public class RecommendationsFragment extends Fragment implements Recommendations
     public void showErrorUi() {
         progressBar.setVisibility(View.INVISIBLE);
         errorLayout.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onRecommendationItemClicked(TrackItem trackItem, int position) {
+        Intent intent = new Intent(getActivity(), ShowTrackDetailsActivity.class);
+        intent.putExtra("track_id", trackItem.id);
+        intent.putExtra("track_title", trackItem.name);
+        startActivity(intent);
     }
 }

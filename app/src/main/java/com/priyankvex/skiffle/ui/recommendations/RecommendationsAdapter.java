@@ -62,7 +62,7 @@ class RecommendationsAdapter extends RecyclerView.Adapter<RecommendationsAdapter
             @Override
             public void onClick(View view) {
                 int position = viewHolder.getAdapterPosition();
-                //mCommunicator.newReleaseItemClicked(position, mRecommendations.get(position));
+                mCommunicator.onRecommendationItemClicked(mRecommendations.get(position), position);
             }
         });
         return viewHolder;

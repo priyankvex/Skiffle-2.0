@@ -79,6 +79,12 @@ public class ShowAlbumDetailsActivity extends AppCompatActivity implements ShowA
                 .build();
         mComponent.inject(this);
 
+        Log.d("owlcity", "in on create album details");
+
+        if (savedInstanceState != null) {
+            mDetailsFragment = (ShowAlbumDetailsFragment) getSupportFragmentManager().findFragmentByTag("customtag");
+        }
+
         mPresenter.setSavedAlbum(getIntent().getBooleanExtra("is_saved", false));
         mPresenter.getAlbumDetails(getIntent().getStringExtra("album_id"));
 
@@ -163,17 +169,22 @@ public class ShowAlbumDetailsActivity extends AppCompatActivity implements ShowA
         buttonLike.setVisibility(View.VISIBLE);
         progressBar.setVisibility(View.GONE);
         errorLayout.setVisibility(View.GONE);
+        Log.d("owlcity", "in on show album details");
         setUpViewPager();
     }
 
     @Override
-    public void getAlbumDetails() {
+    public void getAlbumDetails(ShowAlbumDetailsFragment fragment) {
+        if (mDetailsFragment == null)
+            mDetailsFragment = fragment;
         mDetailsFragment.showAlbumDetails(mPresenter.getAlbumDetails());
     }
 
     @Override
     public void getAlbumTracks() {
-        mTracksFragment.showTracks(mPresenter.getAlbumDetails());
+        if (mTracksFragment != null){
+            mTracksFragment.showTracks(mPresenter.getAlbumDetails());
+        }
     }
 
     @Override
@@ -223,4 +234,9 @@ public class ShowAlbumDetailsActivity extends AppCompatActivity implements ShowA
         }
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean("saved_instance", true);
+    }
 }

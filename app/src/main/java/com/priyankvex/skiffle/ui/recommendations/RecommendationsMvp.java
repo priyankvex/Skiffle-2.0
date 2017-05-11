@@ -15,6 +15,7 @@ public interface RecommendationsMvp {
         void showRecommendations(ArrayList<TrackItem> recommendedTracks);
         void showNoRecommendationsUi();
         void showErrorUi();
+        void onRecommendationItemClicked(TrackItem trackItem, int position);
     }
 
     interface Presenter{

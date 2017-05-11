@@ -7,9 +7,8 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/skiffle_icon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:name=".SkiffleApp"
         android:theme="@style/AppTheme.NoActionBar">
@@ -31,6 +30,8 @@
         <activity android:name=".ui.showtrackdetails.ShowTrackDetailsActivity" />
 
         <activity android:name=".ui.showtrackdetails.WebViewActivity" />
+
+        <activity android:name=".ui.about.AboutActivity" />
 
         <activity android:name=".ui.search.SearchActivity"
             android:launchMode="singleTop">

@@ -58,7 +58,7 @@ public class ShowAlbumDetailsFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_show_album_details, container, false);
         ButterKnife.bind(this, rootView);
         Log.d("owlcity", "Done creating album details fragment");
-        mCommunicator.getAlbumDetails();
+        mCommunicator.getAlbumDetails(this);
         return rootView;
     }
 
@@ -79,6 +79,6 @@ public class ShowAlbumDetailsFragment extends Fragment {
     }
 
     interface AlbumDetailsCommunicator {
-        void getAlbumDetails();
+        void getAlbumDetails(ShowAlbumDetailsFragment fragment);
     }
 }

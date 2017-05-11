@@ -27,7 +27,7 @@ public class CachingControlInterceptor {
             if (cacheControl == null || cacheControl.contains("no-store") || cacheControl.contains("no-cache") ||
                     cacheControl.contains("must-revalidate") || cacheControl.contains("max-age")) {
                 return originalResponse.newBuilder()
-                        .header("Cache-Control", "public, max-age=" + 10)
+                        .header("Cache-Control", "public, max-age=" + 1000)
                         .build();
             } else {
                 return originalResponse;

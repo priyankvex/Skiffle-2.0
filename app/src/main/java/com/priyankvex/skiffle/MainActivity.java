@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         setUpDrawerLayout();
-        setUpToolbar("Skiffle");
+        setUpToolbar("New Releases");
     }
 
     protected void setUpDrawerLayout(){

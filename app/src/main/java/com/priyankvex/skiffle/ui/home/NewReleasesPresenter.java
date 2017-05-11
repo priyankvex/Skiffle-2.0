@@ -47,7 +47,7 @@ public class NewReleasesPresenter implements NewReleasesMvp.NewReleasesPresenter
         mDisposableObserver = new DisposableObserver<NewReleases>() {
             @Override
             public void onNext(NewReleases newReleases) {
-                Log.d(getClass().getName(), newReleases.albums.items + " releases received");
+                //Log.d(getClass().getName(), newReleases.albums.items + " releases received");
                 mView.showNewReleases(newReleases);
             }
 
@@ -55,7 +55,7 @@ public class NewReleasesPresenter implements NewReleasesMvp.NewReleasesPresenter
             public void onError(Throwable e) {
                 if (e instanceof HttpException){
                     int code = ((HttpException) e).response().code();
-                    Log.d(getClass().getName(), "Http Exception code : " + code);
+                    //Log.d(getClass().getName(), "Http Exception code : " + code);
                     if (code == 401){
                         mDataSource.renewAuthToken(new DataSourceContract.AuthRenewCallback() {
                             @Override
@@ -65,14 +65,14 @@ public class NewReleasesPresenter implements NewReleasesMvp.NewReleasesPresenter
 
                             @Override
                             public void onAuthFailed() {
-                                Log.e(getClass().getName(), "Failed to renew auth token");
+                                //Log.e(getClass().getName(), "Failed to renew auth token");
                                 mView.showErrorUi("Authentication Failure. Please try again.");
                             }
                         });
                     }
                 }
                 else{
-                    Log.d(getClass().getName(), e.getLocalizedMessage());
+                    //Log.d(getClass().getName(), e.getLocalizedMessage());
                     mView.showErrorUi("");
                 }
             }

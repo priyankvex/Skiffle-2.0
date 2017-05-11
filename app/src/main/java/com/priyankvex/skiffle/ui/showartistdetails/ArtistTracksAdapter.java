@@ -2,7 +2,6 @@ package com.priyankvex.skiffle.ui.showartistdetails;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,11 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.priyankvex.skiffle.R;
-import com.priyankvex.skiffle.model.AlbumDetails;
-import com.priyankvex.skiffle.model.ArtistTopTracks;
 import com.priyankvex.skiffle.model.TrackItem;
-import com.priyankvex.skiffle.model.TrackList;
-import com.priyankvex.skiffle.ui.showalbumdetails.ShowAlbumDetailsMvp;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -84,7 +79,7 @@ class ArtistTracksAdapter extends RecyclerView.Adapter<ArtistTracksAdapter.ViewH
     void swapData(ArrayList<TrackItem> tracks){
         mTracks.clear();
         mTracks.addAll(tracks);
-        Log.d("owlcity", "No of songs " + mTracks.size());
+        //Log.d("owlcity", "No of songs " + mTracks.size());
         notifyDataSetChanged();
     }
 

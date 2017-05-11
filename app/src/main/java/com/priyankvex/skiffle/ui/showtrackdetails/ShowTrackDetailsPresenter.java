@@ -1,7 +1,5 @@
 package com.priyankvex.skiffle.ui.showtrackdetails;
 
-import android.util.Log;
-
 import com.priyankvex.skiffle.datasource.DataSourceContract;
 import com.priyankvex.skiffle.datasource.SpotifyService;
 import com.priyankvex.skiffle.model.TrackDetails;
@@ -68,7 +66,7 @@ public class ShowTrackDetailsPresenter implements ShowTrackDetailsMvp.ShowTrackD
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.d("owlcity", e.getLocalizedMessage());
+                        //Log.d("owlcity", e.getLocalizedMessage());
                         mView.toggleLikeButton(false);
                     }
 
@@ -90,12 +88,12 @@ public class ShowTrackDetailsPresenter implements ShowTrackDetailsMvp.ShowTrackD
             @Override
             public void onError(Throwable e) {
                 mView.showErrorUi();
-                Log.e("owlcity", e.getLocalizedMessage());
+                //Log.e("owlcity", e.getLocalizedMessage());
             }
 
             @Override
             public void onComplete() {
-                Log.d("owlcity", "Loading track details completed");
+                //Log.d("owlcity", "Loading track details completed");
             }
         };
 
@@ -115,13 +113,13 @@ public class ShowTrackDetailsPresenter implements ShowTrackDetailsMvp.ShowTrackD
 
             @Override
             public void onError(Throwable e) {
-                Log.e("owlcity", e.getLocalizedMessage());
+                //Log.e("owlcity", e.getLocalizedMessage());
                 mView.showErrorUi();
             }
 
             @Override
             public void onComplete() {
-                Log.d("owlcity", "Loading track from local storage completed");
+                //Log.d("owlcity", "Loading track from local storage completed");
             }
         };
 
@@ -144,7 +142,7 @@ public class ShowTrackDetailsPresenter implements ShowTrackDetailsMvp.ShowTrackD
                 .subscribeWith(new DisposableObserver<Long>() {
                     @Override
                     public void onNext(Long value) {
-                        Log.d("owlcity", "Track " + mTrackDetails.name + " saved in favorites");
+                        //Log.d("owlcity", "Track " + mTrackDetails.name + " saved in favorites");
                         mView.reneableLikeButton();
                     }
 
@@ -174,7 +172,7 @@ public class ShowTrackDetailsPresenter implements ShowTrackDetailsMvp.ShowTrackD
                     @Override
                     public void onError(Throwable e) {
                         mView.reneableLikeButton();
-                        Log.e("owlcity", e.getLocalizedMessage());
+                        //Log.e("owlcity", e.getLocalizedMessage());
                     }
 
                     @Override

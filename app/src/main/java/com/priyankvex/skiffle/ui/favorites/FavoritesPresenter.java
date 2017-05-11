@@ -1,7 +1,5 @@
 package com.priyankvex.skiffle.ui.favorites;
 
-import android.util.Log;
-
 import com.priyankvex.skiffle.datasource.DataSourceContract;
 import com.priyankvex.skiffle.model.AlbumItem;
 import com.priyankvex.skiffle.model.TrackItem;
@@ -50,13 +48,13 @@ class FavoritesPresenter implements FavoritesMvp.FavoritesPresenter{
 
             @Override
             public void onError(Throwable e) {
-                Log.e("owlcity", e.getLocalizedMessage());
+                //Log.e("owlcity", e.getLocalizedMessage());
                 mView.showEmptyTracksUi();
             }
 
             @Override
             public void onComplete() {
-                Log.d("owlcity", "Loading favorite tracks completed");
+                ////Log.d("owlcity", "Loading favorite tracks completed");
             }
         };
 
@@ -82,13 +80,13 @@ class FavoritesPresenter implements FavoritesMvp.FavoritesPresenter{
 
             @Override
             public void onError(Throwable e) {
-                Log.e("owlcity", e.getLocalizedMessage());
+                ////Log.e("owlcity", e.getLocalizedMessage());
                 mView.showEmptyAlbumsUi();
             }
 
             @Override
             public void onComplete() {
-                Log.d("owlcity", "Loading favorite albums finished");
+                ////Log.d("owlcity", "Loading favorite albums finished");
             }
         };
 

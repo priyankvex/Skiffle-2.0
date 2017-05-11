@@ -1,7 +1,5 @@
 package com.priyankvex.skiffle.ui.showalbumdetails;
 
-import android.util.Log;
-
 import com.priyankvex.skiffle.datasource.DataSourceContract;
 import com.priyankvex.skiffle.datasource.SpotifyService;
 import com.priyankvex.skiffle.model.AlbumDetails;
@@ -69,13 +67,13 @@ class ShowAlbumDetailsPresenter implements ShowAlbumDetailsMvp.ShowAldumDetailsP
 
             @Override
             public void onError(Throwable e) {
-                Log.d("owlcity", "Error loading album details from local storage : " + e.getLocalizedMessage());
+                //Log.d("owlcity", "Error loading album details from local storage : " + e.getLocalizedMessage());
                 mView.showErrorUi();
             }
 
             @Override
             public void onComplete() {
-                Log.d("owlcity", "Loading album from local storage completed");
+                //Log.d("owlcity", "Loading album from local storage completed");
             }
         };
 
@@ -98,13 +96,13 @@ class ShowAlbumDetailsPresenter implements ShowAlbumDetailsMvp.ShowAldumDetailsP
 
             @Override
             public void onError(Throwable e) {
-                Log.d("owlcity", "Error loading album details from API : " + e.getLocalizedMessage());
+                //Log.d("owlcity", "Error loading album details from API : " + e.getLocalizedMessage());
                 mView.showErrorUi();
             }
 
             @Override
             public void onComplete() {
-                Log.d("owlcity", "Loading album details completed");
+                //Log.d("owlcity", "Loading album details completed");
             }
         };
 
@@ -123,18 +121,18 @@ class ShowAlbumDetailsPresenter implements ShowAlbumDetailsMvp.ShowAldumDetailsP
                 .subscribeWith(new DisposableObserver<Long>() {
                     @Override
                     public void onNext(Long value) {
-                        Log.d("owlcity", "Album saved with id : " + value);
+                        //Log.d("owlcity", "Album saved with id : " + value);
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.d("owlcity", "On error of save album subscriber\n" + e.getLocalizedMessage());
+                        //Log.d("owlcity", "On error of save album subscriber\n" + e.getLocalizedMessage());
                         mView.reenableLikeButton();
                     }
 
                     @Override
                     public void onComplete() {
-                        Log.d("owlcity", "On complete of save album subscriber");
+                        //Log.d("owlcity", "On complete of save album subscriber");
                         mView.reenableLikeButton();
                     }
                 });

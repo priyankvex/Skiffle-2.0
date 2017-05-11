@@ -9,7 +9,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -86,7 +85,7 @@ public class SearchActivity extends AppCompatActivity implements SearchMvp.Searc
         Intent intent = getIntent();
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
-            Log.d("owlcity", "Searching for query : " + query);
+            //Log.d("owlcity", "Searching for query : " + query);
             SearchRecentSuggestions suggestions = new SearchRecentSuggestions(this,
                     SearchSuggestionsProvider.AUTHORITY, SearchSuggestionsProvider.MODE);
             suggestions.saveRecentQuery(query, null);
@@ -134,7 +133,7 @@ public class SearchActivity extends AppCompatActivity implements SearchMvp.Searc
 
     @Override
     public void onSearchResultsPreviewItemClicked(SearchResultsListItem item, int position) {
-        Log.d("owlcity", "Item clicked is a : " + item.itemType);
+        //Log.d("owlcity", "Item clicked is a : " + item.itemType);
         if (item.viewType == SearchResultsListItem.ViewType.HEADER_VIEW){
             switch (item.title){
                 case "Songs" :

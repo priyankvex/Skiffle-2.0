@@ -1,7 +1,5 @@
 package com.priyankvex.skiffle.util;
 
-import android.util.Log;
-
 import com.priyankvex.skiffle.SkiffleApp;
 
 import java.io.IOException;
@@ -23,7 +21,7 @@ public class CachingControlInterceptor {
 
             Response originalResponse = chain.proceed(chain.request());
             String cacheControl = originalResponse.header("Cache-Control");
-            Log.d("owlcity", cacheControl + " cache header");
+            //Log.d("owlcity", cacheControl + " cache header");
             if (cacheControl == null || cacheControl.contains("no-store") || cacheControl.contains("no-cache") ||
                     cacheControl.contains("must-revalidate") || cacheControl.contains("max-age")) {
                 return originalResponse.newBuilder()
@@ -44,7 +42,7 @@ public class CachingControlInterceptor {
 
             if (!ConnectionUtil.isNetworkAvailable(SkiffleApp.getInstance()
                     .getApplicationContext())) {
-                Log.d("owlcity", "rewriting request");
+                //Log.d("owlcity", "rewriting request");
 
                 int maxStale = 60 * 60 * 24 * 28; // tolerate 4-weeks stale
                 request = request.newBuilder()

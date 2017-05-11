@@ -1,13 +1,9 @@
 package com.priyankvex.skiffle.ui.showartistdetails;
 
-import android.util.Log;
-
 import com.priyankvex.skiffle.datasource.DataSourceContract;
 import com.priyankvex.skiffle.datasource.SpotifyService;
-import com.priyankvex.skiffle.model.AlbumDetails;
 import com.priyankvex.skiffle.model.ArtistDetails;
 import com.priyankvex.skiffle.model.ArtistTopTracks;
-import com.priyankvex.skiffle.model.TrackList;
 
 import javax.inject.Inject;
 
@@ -56,13 +52,13 @@ public class ShowArtistDetailsPresenter implements ShowArtistDetailsMvp.ShowArti
 
             @Override
             public void onError(Throwable e) {
-                Log.e("owlcity", e.getLocalizedMessage());
+                ////Log.e("owlcity", e.getLocalizedMessage());
                 mView.showArtistDetailsErrorUi();
             }
 
             @Override
             public void onComplete() {
-                Log.d("owlcity", "Loading artist details completed");
+                //Log.d("owlcity", "Loading artist details completed");
             }
         };
 
@@ -83,13 +79,13 @@ public class ShowArtistDetailsPresenter implements ShowArtistDetailsMvp.ShowArti
 
             @Override
             public void onError(Throwable e) {
-                Log.e("owlcity", e.getLocalizedMessage());
+                //Log.e("owlcity", e.getLocalizedMessage());
                 mView.showArtistTopTrackErrorUi();
             }
 
             @Override
             public void onComplete() {
-                Log.d("owlcity", "Loading artist tracks completed");
+                //Log.d("owlcity", "Loading artist tracks completed");
             }
         };
 

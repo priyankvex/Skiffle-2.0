@@ -17,8 +17,6 @@ public class SkiffleApp extends Application{
 
     private SkiffleApplicationComponent mComponent;
 
-    private SpotifyAuthService mSpotifyAuthService;
-
     @Override
     public void onCreate() {
         super.onCreate();

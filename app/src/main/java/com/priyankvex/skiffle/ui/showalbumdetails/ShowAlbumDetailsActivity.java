@@ -79,7 +79,7 @@ public class ShowAlbumDetailsActivity extends AppCompatActivity implements ShowA
                 .build();
         mComponent.inject(this);
 
-        Log.d("owlcity", "in on create album details");
+        //Log.d("owlcity", "in on create album details");
 
         if (savedInstanceState != null) {
             mDetailsFragment = (ShowAlbumDetailsFragment) getSupportFragmentManager().findFragmentByTag("customtag");
@@ -169,7 +169,7 @@ public class ShowAlbumDetailsActivity extends AppCompatActivity implements ShowA
         buttonLike.setVisibility(View.VISIBLE);
         progressBar.setVisibility(View.GONE);
         errorLayout.setVisibility(View.GONE);
-        Log.d("owlcity", "in on show album details");
+        //Log.d("owlcity", "in on show album details");
         setUpViewPager();
     }
 

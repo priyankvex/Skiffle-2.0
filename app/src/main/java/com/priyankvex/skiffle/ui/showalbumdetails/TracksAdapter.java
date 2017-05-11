@@ -2,7 +2,6 @@ package com.priyankvex.skiffle.ui.showalbumdetails;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,7 +36,7 @@ class TracksAdapter extends RecyclerView.Adapter<TracksAdapter.ViewHolder>{
         this.mContext = context;
         this.mCommunicator = communicator;
         this.mTracks = new ArrayList<>();
-        Log.d("owlcity", "New Adapter created");
+        //Log.d("owlcity", "New Adapter created");
     }
 
     @Override
@@ -76,7 +75,7 @@ class TracksAdapter extends RecyclerView.Adapter<TracksAdapter.ViewHolder>{
         this.mAlbum = album;
         mTracks.clear();
         mTracks.addAll(album.tracks.items);
-        Log.d("owlcity", "No of songs " + mTracks.size());
+        //Log.d("owlcity", "No of songs " + mTracks.size());
         notifyDataSetChanged();
     }
 

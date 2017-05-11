@@ -1,7 +1,5 @@
 package com.priyankvex.skiffle.ui.search;
 
-import android.util.Log;
-
 import com.priyankvex.skiffle.datasource.DataSourceContract;
 import com.priyankvex.skiffle.datasource.SpotifyService;
 import com.priyankvex.skiffle.model.AlbumItem;
@@ -55,7 +53,7 @@ public class SearchPresenter implements SearchMvp.SearchPresenter{
 
             @Override
             public void onError(Throwable e) {
-                Log.d("owlcity", e.getLocalizedMessage());
+                //Log.d("owlcity", e.getLocalizedMessage());
                 mView.showErrorUi();
             }
 
@@ -90,7 +88,7 @@ public class SearchPresenter implements SearchMvp.SearchPresenter{
 
             @Override
             public void onError(Throwable e) {
-                Log.d("owlcity", e.getLocalizedMessage());
+                //Log.d("owlcity", e.getLocalizedMessage());
                 mView.showErrorUi();
             }
 
@@ -118,7 +116,7 @@ public class SearchPresenter implements SearchMvp.SearchPresenter{
 
             @Override
             public void onError(Throwable e) {
-                Log.d("owlcity", e.getLocalizedMessage());
+                //Log.d("owlcity", e.getLocalizedMessage());
                 mView.showErrorUi();
             }
 
@@ -146,7 +144,7 @@ public class SearchPresenter implements SearchMvp.SearchPresenter{
 
             @Override
             public void onError(Throwable e) {
-                Log.d("owlcity", e.getLocalizedMessage());
+                //Log.d("owlcity", e.getLocalizedMessage());
                 mView.showErrorUi();
             }
 

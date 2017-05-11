@@ -84,13 +84,13 @@ public class RecommendationsPresenter implements RecommendationsMvp.Presenter{
 
             @Override
             public void onError(Throwable e) {
-                Log.e("owlcity", e.getLocalizedMessage());
+                //Log.e("owlcity", e.getLocalizedMessage());
                 mView.showErrorUi();
             }
 
             @Override
             public void onComplete() {
-                Log.d("owlcity", "loading recommendations completed");
+                //Log.d("owlcity", "loading recommendations completed");
             }
         };
 

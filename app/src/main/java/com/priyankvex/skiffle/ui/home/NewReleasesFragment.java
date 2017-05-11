@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -91,7 +90,7 @@ public class NewReleasesFragment extends Fragment implements NewReleasesMvp.NewR
 
     @Override
     public void newReleaseItemClicked(int position, AlbumItem item) {
-        Log.d("owlcity", item.name + " clicked");
+        //Log.d("owlcity", item.name + " clicked");
         Intent i = new Intent(getActivity(), ShowAlbumDetailsActivity.class);
         i.putExtra("album_id", item.id);
         i.putExtra("album_title", item.name);

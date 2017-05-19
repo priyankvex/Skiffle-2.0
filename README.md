@@ -4,6 +4,9 @@
 Skiffle is the fastest way to discover and search music.
 Powered by the powerful Spotify API it delivers a fast way to search for music. With offline support and super smooth UX and small size, it's a handy app to keep.
 
+## Blog Post Of The Making
+https://priyankvex.wordpress.com/2017/05/12/skiffle-android-app-to-discover-search-and-explore-music-the-making/
+
 ## Screenshots
 
 ![New Releases](http://i.imgur.com/3u2QGzq.png "New Releases") ![New Releases](http://i.imgur.com/Pb1771g.png "Search Results") ![New Releases](http://i.imgur.com/EuUf3b6.png "Track Details") ![New Releases](http://i.imgur.com/zbSQjP8.png "Artist Details") 
